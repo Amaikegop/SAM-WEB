@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>SAM - Sistema automatizado de mensajes</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link rel="stylesheet" href="scss/bootstrap.css">
+
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Cargando...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid sticky-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light border-bottom border-2 border-white border-nav">
+                <a href="index.html" class="navbar-brand">
+                    <h1>SAM</h1>
+                </a>
+                <button type="button" class="navbar-toggler ms-auto me-0" data-bs-toggle="collapse"
+                    data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto">
+                        <a href="index.html" class="nav-item nav-link active">Inicio</a>
+                        <a href="about.html" class="nav-item nav-link">Nosotros</a>
+                        <a href="service.html" class="nav-item nav-link">Servicios</a>
+                        <!-- <div class="nav-item dropdown">
+                            <a href="#!" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                            <div class="dropdown-menu bg-light mt-2">
+                                <a href="feature.html" class="dropdown-item">Features</a>
+                                <a href="team.html" class="dropdown-item">Our Team</a>
+                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                                <a href="404.html" class="dropdown-item">404 Page</a>
+                            </div>
+                        </div> -->
+                        <a href="contact.html" class="nav-item nav-link">Contacto</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Hero Start -->
+    <div class="container-fluid pb-5 hero-header bg-light mb-5">
+        <div class="container pt-3 pb-5">
+            <div class="row g-5 align-items-center mb-5">
+                <div class="col-lg-6">
+                    <h1 class="display-2 mb-4 animated slideInRight text-light">Automatiza la <span class="text-secondary">gestión de turnos </span>
+                        de tu negocio con SAM</h1>
+                    
+                </div>
+                <div class="col-lg-6">
+                    <div class="owl-carousel header-carousel animated fadeIn">
+                        <img class="img-fluid" src="img/index.png" alt="">
+                        <img class="img-fluid" src="img/index2.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="row g-5 animated fadeIn">
+                <div class="col-md-4 col-lg-4">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <div class="flex-shrink-0 btn-square border border-2 border-white me-3">
+                            <i class="fa fa-robot text-primary"></i>
+                        </div>
+                        <h5 class="lh-base mb-0 text">Simple</h5>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <div class="flex-shrink-0 btn-lg me-3">
+                            <i class="bi bi-clock"></i>
+                        </div>
+                        <h5 class="lh-base mb-0">Rápido</h5>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <div class="flex-shrink-0 btn-square border border-2 border-white me-3">
+                            <i class="fa fa-robot text-primary"></i>
+                        </div>
+                        <h5 class="lh-base mb-0">Efectivo</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hero End -->
+
+
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-6 wow fadeIn" data-wow-delay="0.1s">
+                            <img class="img-fluid" src="img/about-1.jpg" alt="">
+                        </div>
+                        <div class="col-6 wow fadeIn" data-wow-delay="0.3s">
+                            <img class="img-fluid h-75" src="img/about-2.jpg" alt="">
+                            <div class="h-25 d-flex align-items-center text-center bg-primary px-4">
+                                <h4 class="text-white lh-base mb-0">Award Winning Studio Since 1990</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                    <h1 class="mb-5">Sobre <span class="text-uppercase text-primary bg-light px-2">Nosotros</span></h1>
+                    <p class="mb-4">SAM nació como un proyecto de dos estudiantes de la Facultad de Ciencias Exactas de la Universidad Nacional del Centro (UNICEN), en Tandil. Desde nuestras primeras experiencias académicas y laborales vimos de cerca cómo los negocios y profesionales pierden tiempo valioso atendiendo mensajes y coordinando turnos de manera manual.</p>
+                    <p class="mb-5">Con ese problema en mente, decidimos aplicar nuestros conocimientos en inteligencia artificial y desarrollo de software para crear una solución práctica, accesible y 100% pensada para las necesidades reales de emprendedores, comercios y empresas: un asistente automatizado por WhatsApp que centraliza la gestión y organiza el trabajo diario.</p>
+                    <!-- <div class="row g-3">
+                        <div class="col-sm-6">
+                            <h6 class="mb-3"><i class="fa fa-check text-primary me-2"></i>Award Winning</h6>
+                            <h6 class="mb-0"><i class="fa fa-check text-primary me-2"></i>Professional Staff</h6>
+                        </div>
+                        <div class="col-sm-6">
+                            <h6 class="mb-3"><i class="fa fa-check text-primary me-2"></i>24/7 Support</h6>
+                            <h6 class="mb-0"><i class="fa fa-check text-primary me-2"></i>Fair Prices</h6>
+                        </div>
+                    </div> -->
+                    <div class="d-flex align-items-center mt-5">
+                        <a class="btn btn-primary px-4 me-2" href="#!">Ver más</a>
+                        <a class="btn btn-outline-primary btn-square border-2 me-2" href="#!"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-primary btn-square border-2 me-2" href="#!"><i
+                                class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-primary btn-square border-2 me-2" href="#!"><i
+                                class="fab fa-instagram"></i></a>
+                        <a class="btn btn-outline-primary btn-square border-2" href="#!"><i
+                                class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+
+
+    <!-- Feature Start -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="text-center wow fadeIn" data-wow-delay="0.1s">
+                <h1 class="mb-5">¿Por qué elegir <span class="text-uppercase text-primary bg-light px-2">SAM</span>?
+                </h1>
+            </div>
+            <div class="row g-5 align-items-center text-center">
+                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.1s">
+                    <i class="fa fa-calendar-alt fa-5x text-primary mb-4"></i>
+                    <h4>Ahorro de tiempo real</h4>
+                    <p class="mb-0">Olvidate de coordinar turnos manualmente. SAM automatiza todo el proceso para que dediques tus horas a lo que realmente importa: hacer crecer tu negocio.</p>
+                </div>
+                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.3s">
+                    <i class="fa fa-tasks fa-5x text-primary mb-4"></i>
+                    <h4>Organización sin esfuerzo</h4>
+                    <p class="mb-0">Toda la información de tus clientes y turnos queda en un solo lugar, de manera clara y accesible. Se terminó el caos de papeles, chats perdidos o agendas desordenadas.</p>
+                </div>
+                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.5s">
+                    <i class="fa fa-pencil-ruler fa-5x text-primary mb-4"></i>
+                    <h4>Personalización total</h4>
+                    <p class="mb-0">No todos los negocios son iguales, y lo entendemos. Configuramos SAM a la medida de tus necesidades, con mensajes y funciones adaptados a tu rubro.</p>
+                </div>
+                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.1s">
+                    <i class="fa fa-user fa-5x text-primary mb-4"></i>
+                    <h4>Atención cercana</h4>
+                    <p class="mb-0">Aunque sea un sistema automatizado, detrás hay un equipo que te acompaña en cada paso. Desde la puesta en marcha hasta el uso diario, nunca estás solo.</p>
+                </div>
+                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.3s">
+                    <i class="fa fa-hand-holding-usd fa-5x text-primary mb-4"></i>
+                    <h4>Suscripción accesible</h4>
+                    <p class="mb-0">Planes simples y transparentes. Elegís el que mejor se adapte a tu negocio, sin costos ocultos y con la tranquilidad de saber que siempre podés crecer.</p>
+                </div>
+                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.5s">
+                    <i class="fa fa-check fa-5x text-primary mb-4"></i>
+                    <h4>Imagen profesional</h4>
+                    <p class="mb-0">Tus clientes notarán la diferencia: un canal ordenado, disponible 24/7, que transmite seriedad y confianza. SAM no solo organiza tu trabajo, también mejora cómo se ve tu negocio.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Feature End -->
+
+    <div class="container py-3">
+        <div class="text-center wow fadeIn" data-wow-delay="0.1s">
+                <h1 class="mb-5">Servicios</h1>
+            </div>
+        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+          <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm">
+              <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">Free</h4>
+              </div>
+              <div class="card-body">
+                <h1 class="card-title pricing-card-title">
+                  $0<small class="text-body-secondary fw-light">/mo</small>
+                </h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                  <li>10 users included</li>
+                  <li>2 GB of storage</li>
+                  <li>Email support</li>
+                  <li>Help center access</li>
+                </ul>
+                <button
+                  type="button"
+                  class="w-100 btn btn-lg btn-outline-primary"
+                >
+                  Sign up for free
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm">
+              <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">Pro</h4>
+              </div>
+              <div class="card-body">
+                <h1 class="card-title pricing-card-title">
+                  $15<small class="text-body-secondary fw-light">/mo</small>
+                </h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                  <li>20 users included</li>
+                  <li>10 GB of storage</li>
+                  <li>Priority email support</li>
+                  <li>Help center access</li>
+                </ul>
+                <button type="button" class="w-100 btn btn-lg btn-primary">
+                  Get started
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm border-primary">
+              <div class="card-header py-3 text-bg-primary border-primary">
+                <h4 class="my-0 fw-normal">Enterprise</h4>
+              </div>
+              <div class="card-body">
+                <h1 class="card-title pricing-card-title">
+                  $29<small class="text-body-secondary fw-light">/mo</small>
+                </h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                  <li>30 users included</li>
+                  <li>15 GB of storage</li>
+                  <li>Phone and email support</li>
+                  <li>Help center access</li>
+                </ul>
+                <button type="button" class="w-100 btn btn-lg btn-primary">
+                  Contact us
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <h2 class="display-6 text-center mb-4">Compare plans</h2> -->
+        <!-- <div class="table-responsive">
+          <table class="table text-center">
+            <thead>
+              <tr>
+                <th style="width: 34%"></th>
+                <th style="width: 22%">Free</th>
+                <th style="width: 22%">Pro</th>
+                <th style="width: 22%">Enterprise</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" class="text-start">Public</th>
+                <td>
+                  <svg
+                    class="bi"
+                    width="24"
+                    height="24"
+                    role="img"
+                    aria-label="Included"
+                  >
+                    <use xlink:href="#check"></use>
+                  </svg>
+                </td>
+                <td>
+                  <svg
+                    class="bi"
+                    width="24"
+                    height="24"
+                    role="img"
+                    aria-label="Included"
+                  >
+                    <use xlink:href="#check"></use>
+                  </svg>
+                </td>
+                <td>
+                  <svg
+                    class="bi"
+                    width="24"
+                    height="24"
+                    role="img"
+                    aria-label="Included"
+                  >
+                    <use xlink:href="#check"></use>
+                  </svg>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row" class="text-start">Private</th>
+                <td></td>
+                <td>
+                  <svg
+                    class="bi"
+                    width="24"
+                    height="24"
+                    role="img"
+                    aria-label="Included"
+                  >
+                    <use xlink:href="#check"></use>
+                  </svg>
+                </td>
+                <td>
+                  <svg
+                    class="bi"
+                    width="24"
+                    height="24"
+                    role="img"
+                    aria-label="Included"
+                  >
+                    <use xlink:href="#check"></use>
+                  </svg>
+                </td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <th scope="row" class="text-start">Permissions</th>
+                <td>
+                  <svg
+                    class="bi"
+                    width="24"
+                    height="24"
+                    role="img"
+                    aria-label="Included"
+                  >
+                    <use xlink:href="#check"></use>
+                  </svg>
+                </td>
+                <td>
+                  <svg
+                    class="bi"
+                    width="24"
+                    height="24"
+                    role="img"
+                    aria-label="Included"
+                  >
+                    <use xlink:href="#check"></use>
+                  </svg>
+                </td>
+                <td>
+                  <svg
+                    class="bi"
+                    width="24"
+                    height="24"
+                    role="img"
+                    aria-label="Included"
+                  >
+                    <use xlink:href="#check"></use>
+                  </svg>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row" class="text-start">Sharing</th>
+                <td></td>
+                <td>
+                  <svg
+                    class="bi"
+                    width="24"
+                    height="24"
+                    role="img"
+                    aria-label="Included"
+                  >
+                    <use xlink:href="#check"></use>
+                  </svg>
+                </td>
+                <td>
+                  <svg
+                    class="bi"
+                    width="24"
+                    height="24"
+                    role="img"
+                    aria-label="Included"
+                  >
+                    <use xlink:href="#check"></use>
+                  </svg>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row" class="text-start">Unlimited members</th>
+                <td></td>
+                <td>
+                  <svg
+                    class="bi"
+                    width="24"
+                    height="24"
+                    role="img"
+                    aria-label="Included"
+                  >
+                    <use xlink:href="#check"></use>
+                  </svg>
+                </td>
+                <td>
+                  <svg
+                    class="bi"
+                    width="24"
+                    height="24"
+                    role="img"
+                    aria-label="Included"
+                  >
+                    <use xlink:href="#check"></use>
+                  </svg>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row" class="text-start">Extra security</th>
+                <td></td>
+                <td></td>
+                <td>
+                  <svg
+                    class="bi"
+                    width="24"
+                    height="24"
+                    role="img"
+                    aria-label="Included"
+                  >
+                    <use xlink:href="#check"></use>
+                  </svg>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div> -->
+    </div>
+
+
+    <!-- Team Start -->
+    <div class="container-fluid bg-light py-5">
+        <div class="container py-5">
+            <h1 class="mb-5">Nuestro <span class="text-uppercase text-primary bg-light px-2">Equipo</span>
+            </h1>
+            <div class="d-flex justify-content-around g-4">
+
+                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
+                    <div class="team-item position-relative overflow-hidden">
+                        <img class="img-fluid w-100" src="img/team-3.jpg" alt="">
+                        <div class="team-overlay">
+                            <small class="mb-2">Architect</small>
+                            <h4 class="lh-base text-light">Bradley Gordon</h4>
+                            <div class="d-flex justify-content-center">
+                                <a class="btn btn-outline-primary btn-sm-square border-2 me-2" href="#!">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a class="btn btn-outline-primary btn-sm-square border-2 me-2" href="#!">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a class="btn btn-outline-primary btn-sm-square border-2 me-2" href="#!">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a class="btn btn-outline-primary btn-sm-square border-2 me-2" href="#!">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">
+                    <div class="team-item position-relative overflow-hidden">
+                        <img class="img-fluid w-100" src="img/team-4.jpg" alt="">
+                        <div class="team-overlay">
+                            <small class="mb-2">Architect</small>
+                            <h4 class="lh-base text-light">Alexander Bell</h4>
+                            <div class="d-flex justify-content-center">
+                                <a class="btn btn-outline-primary btn-sm-square border-2 me-2" href="#!">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a class="btn btn-outline-primary btn-sm-square border-2 me-2" href="#!">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a class="btn btn-outline-primary btn-sm-square border-2 me-2" href="#!">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a class="btn btn-outline-primary btn-sm-square border-2 me-2" href="#!">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Team End -->
+
+
+    <!-- Testimonial Start -->
+    <div class="container-xxl py-5">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-md-12 col-lg-9">
+                    <div class="owl-carousel testimonial-carousel wow fadeIn" data-wow-delay="0.2s">
+                        <div class="testimonial-item">
+                            <div class="row g-5 align-items-center">
+                                <div class="col-md-6">
+                                    <div class="testimonial-img">
+                                        <img class="img-fluid" src="img/testimonial-1.jpg" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="testimonial-text pb-5 pb-md-0">
+                                        <h3>Sustainable Material</h3>
+                                        <p>Aliqu diam amet diam et eos labore. Clita erat ipsum et lorem et sit, sed
+                                            stet no labore lorem sit. Sanctus clita duo justo et tempor eirmod magna
+                                            dolore erat
+                                            amet</p>
+                                        <h5 class="mb-0">Boris Johnson</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-item">
+                            <div class="row g-5 align-items-center">
+                                <div class="col-md-6">
+                                    <div class="testimonial-img">
+                                        <img class="img-fluid" src="img/testimonial-2.jpg" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="testimonial-text pb-5 pb-md-0">
+                                        <h3>Customer Satisfaction</h3>
+                                        <p>Clita erat ipsum et lorem et sit, sed
+                                            stet no labore lorem sit. Sanctus clita duo justo et tempor eirmod magna
+                                            dolore erat
+                                            amet</p>
+                                        <h5 class="mb-0">Alexander Bell</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-item">
+                            <div class="row g-5 align-items-center">
+                                <div class="col-md-6">
+                                    <div class="testimonial-img">
+                                        <img class="img-fluid" src="img/testimonial-3.jpg" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="testimonial-text pb-5 pb-md-0">
+                                        <h3>Budget Friendly</h3>
+                                        <p>Diam amet diam et eos labore. Clita erat ipsum et lorem et sit, sed
+                                            stet no labore lorem sit. Sanctus clita duo justo et tempor eirmod magna
+                                            dolore erat
+                                            amet</p>
+                                        <h5 class="mb-0">Bradley Gordon</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Testimonial End -->
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-white-50 footer pt-5">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
+                    <a href="index.html" class="d-inline-block mb-3">
+                        <h1 class="text-white">iSTUDIO</h1>
+                    </a>
+                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam
+                        amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus
+                        clita duo justo et tempor</p>
+                </div>
+                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
+                    <h5 class="text-white mb-4">Get In Touch</h5>
+                    <p><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
+                    <p><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+                    <p><i class="fa fa-envelope me-3"></i>info@example.com</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-outline-primary btn-square border-2 me-2" href="#!"><i
+                                class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-primary btn-square border-2 me-2" href="#!"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-primary btn-square border-2 me-2" href="#!"><i
+                                class="fab fa-youtube"></i></a>
+                        <a class="btn btn-outline-primary btn-square border-2 me-2" href="#!"><i
+                                class="fab fa-instagram"></i></a>
+                        <a class="btn btn-outline-primary btn-square border-2 me-2" href="#!"><i
+                                class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
+                    <h5 class="text-white mb-4">Popular Link</h5>
+                    <a class="btn btn-link" href="#!">About Us</a>
+                    <a class="btn btn-link" href="#!">Contact Us</a>
+                    <a class="btn btn-link" href="#!">Privacy Policy</a>
+                    <a class="btn btn-link" href="#!">Terms & Condition</a>
+                    <a class="btn btn-link" href="#!">Career</a>
+                </div>
+                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">
+                    <h5 class="text-white mb-4">Our Services</h5>
+                    <a class="btn btn-link" href="#!">Interior Design</a>
+                    <a class="btn btn-link" href="#!">Project Planning</a>
+                    <a class="btn btn-link" href="#!">Renovation</a>
+                    <a class="btn btn-link" href="#!">Implement</a>
+                    <a class="btn btn-link" href="#!">Landscape Design</a>
+                </div>
+            </div>
+        </div>
+        <div class="container wow fadeIn" data-wow-delay="0.1s">
+            <div class="copyright">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a class="border-bottom" href="#!">Your Site Name</a>, All Right Reserved.
+
+                        <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
+                        <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
+                        <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
+                        Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>. Distributed by
+                        <a class="border-bottom" href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="footer-menu">
+                            <a href="#!">Home</a>
+                            <a href="#!">Cookies</a>
+                            <a href="#!">Help</a>
+                            <a href="#!">FAQs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#!" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

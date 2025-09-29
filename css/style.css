@@ -59,28 +59,38 @@
     transition: .5s;
 }
 
+/* Estado cuando scrollea */
+.sticky-top.scrolled .navbar-nav .nav-link {
+  color: var(--bs-secondary); /* acá poné el color que quieras */
+}
+
 .navbar {
-    padding: 15px 0;
-    font-family: "Space Grotesk", sans-serif;
+    /* font-family: "Space Grotesk", sans-serif; */
     font-size: 18px;
 }
 
 .navbar .navbar-nav .nav-link {
     margin-left: 30px;
-    padding: 0;
+    /* padding: 5px; */
     outline: none;
-    color: var(--bs-dark);
+    color: var(--bs-light);
+    /* border-radius: 2px; */
+    border-radius: 8px;   /* redondeo medio */
+    padding: 0.5rem 1rem; /* espacio interno */
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .navbar .navbar-nav .nav-link:hover,
 .navbar .navbar-nav .nav-link.active {
-    color: var(--bs-primary)
+  color: #fff;
+  background-color: var(--bs-primary); /* rojo principal */
 }
+
 
 .navbar .dropdown-toggle::after {
     border: none;
     content: "\f107";
-    font-family: "Font Awesome 5 Free";
+    /* font-family: "Font Awesome 5 Free"; */
     font-weight: 900;
     vertical-align: middle;
     margin-left: 8px;
@@ -89,8 +99,16 @@
 .navbar .dropdown-menu .dropdown-item:hover,
 .navbar .dropdown-menu .dropdown-item.active {
     color: var(--bs-white);
-    background: var(--bs-primary);
+    background-color: #f1100075;
 }
+
+.navbar-brand img {
+  height: 60px;     /* más grande */
+  width: auto;
+  display: block;
+  margin-right: 12px;
+}
+
 
 @media (max-width: 991.98px) {
     .navbar .navbar-nav .nav-link  {
@@ -118,6 +136,7 @@
     }
 }
 
+
 /*** Hero Header ***/
 .hero-header {
     margin-top: -100px;
@@ -128,6 +147,24 @@
 
 .hero-header .breadcrumb-item+.breadcrumb-item::before {
     color: var(--light);
+}
+
+
+.hero-title {
+    color: var(--bs-light);
+}
+
+@media (max-width: 992px) { 
+    .hero-header {
+        margin-top: -100px;
+        padding-top: 150px;
+        background: url(../img/fondo576px.png) top center no-repeat;
+        background-size: cover;
+    }
+    .hero-title {
+        color: var(--bs-dark) 
+    }
+    
 }
 
 .header-carousel {
@@ -175,8 +212,10 @@
 
 /*** About ***/
 .about-img {
-    position: relative;
-    overflow: hidden;
+    height: 350px;     /* más grande */
+    width: auto;
+    display: block;
+    margin-right: 12px;
 }
 
 .about-img::after {
@@ -215,6 +254,27 @@
     z-index: 1;
 }
 
+.card-header {
+    border: 5px;
+    border-color: aqua;
+}
+.card-body ul li {
+  margin-bottom: 0.75rem;
+}
+.card h4 {
+  font-size: 1.5rem;
+}
+.card .pricing-card-title {
+  font-size: 2rem;
+}
+.card .btn {
+  font-weight: 600;
+  border-width: 2px;
+}
+.card:hover {
+  transform: translateY(-5px);
+  transition: all 0.3s ease;
+}
 
 /*** Service ***/
 .service-item {
@@ -311,6 +371,31 @@
     background: var(--bs-primary);
 }
 
+@media (max-width: 576px) { 
+    .team-overlay {
+        position: absolute;
+        padding: 10px;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        background: linear-gradient(rgba(255, 255, 255, .1) 50%, var(--bs-dark));
+        z-index: 1;
+        font-size: small;
+    }
+
+    .team-overlay small {
+        display: inline-block;
+        padding: 3px 3px;
+        color: var(--bs-white);
+        background: var(--bs-primary);
+    }
+    
+}
 
 /*** Testimonial ***/
 .testimonial-img {
@@ -431,7 +516,7 @@
 .footer .btn.btn-link::before {
     position: relative;
     content: "\f105";
-    font-family: "Font Awesome 5 Free";
+    /* font-family: "Font Awesome 5 Free"; */
     font-weight: 900;
     margin-right: 10px;
 }
@@ -460,4 +545,10 @@
     margin-right: 0;
     padding-right: 0;
     border-right: none;
+}
+
+.footer .img {
+    height: 100px;     /* más grande */
+    width: auto;
+    display: block;
 }

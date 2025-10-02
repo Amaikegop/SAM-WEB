@@ -53,15 +53,16 @@
             <nav class="navbar navbar-expand-lg">
                 <a href="index.html" class="navbar-brand">
                     <img id="navbar-logo" src="img/SAM(tranparente).png" alt="">
-                    <!-- <img class="" src="img/SAM(negativo-transparente).png" alt=""> -->
                 </a>
-                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" 
-                        data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" 
-                        aria-expanded="false" aria-label="Toggle navigation">
+
+                <!-- Botón para abrir sidebar -->
+                <button class="btn d-lg-none ms-auto" type="button" data-bs-toggle="offcanvas" 
+                        data-bs-target="#mobileMenu" aria-controls="mobileMenu">
                     <i class="bi bi-list fs-1"></i>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarCollapse">
+                <!-- Menú normal para desktop -->
+                <div class="collapse navbar-collapse d-none d-lg-flex" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
                         <a href="index.html" class="nav-item nav-link">Inicio</a>
                         <a href="about.html" class="nav-item nav-link">Nosotros</a>
@@ -72,7 +73,23 @@
             </nav>
         </div>
     </div>
-    <!-- Navbar End -->
+
+    <!-- Offcanvas menú para móviles -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="mobileMenuLabel">Menú</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="navbar-nav flex-column">
+                <a href="index.html" class="nav-item nav-link">Inicio</a>
+                <a href="about.html" class="nav-item nav-link">Nosotros</a>
+                <a href="service.html" class="nav-item nav-link">Servicios</a>
+                <a href="contact.html" class="nav-item nav-link">Contacto</a>
+            </div>
+        </div>
+    </div>
+
 
     <div class="container-fluid pb-5 hero-header bg-light">
         <div class="container text-center">
@@ -174,48 +191,6 @@
         </div>
     </section>
 
-      <!-- Feature Start -->
-    <!-- <div class="container-fluid py-5">
-        <div class="container">
-            <div class="text-center wow fadeIn" data-25wow-delay="0.1s">
-                <h1 class="mb-5">¿Por qué elegir <span class="text-uppercase text-primary bg-light px-2">SAM</span>?
-                </h1>
-            </div>
-            <div class="row g-5 align-items-center text-center">
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.1s">
-                    <i class="fa fa-calendar-alt fa-5x text-primary mb-4"></i>
-                    <h4>Ahorro de tiempo real</h4>
-                    <p class="mb-0">Olvidate de coordinar turnos manualmente. SAM automatiza todo el proceso para que dediques tus horas a lo que realmente importa: hacer crecer tu negocio.</p>
-                </div>
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.3s">
-                    <i class="fa fa-tasks fa-5x text-primary mb-4"></i>
-                    <h4>Organización sin esfuerzo</h4>
-                    <p class="mb-0">Toda la información de tus clientes y turnos queda en un solo lugar, de manera clara y accesible. Se terminó el caos de papeles, chats perdidos o agendas desordenadas.</p>
-                </div>
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.5s">
-                    <i class="fa fa-pencil-ruler fa-5x text-primary mb-4"></i>
-                    <h4>Personalización total</h4>
-                    <p class="mb-0">No todos los negocios son iguales, y lo entendemos. Configuramos SAM a la medida de tus necesidades, con mensajes y funciones adaptados a tu rubro.</p>
-                </div>
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.1s">
-                    <i class="fa fa-user fa-5x text-primary mb-4"></i>
-                    <h4>Atención cercana</h4>
-                    <p class="mb-0">Aunque sea un sistema automatizado, detrás hay un equipo que te acompaña en cada paso. Desde la puesta en marcha hasta el uso diario, nunca estás solo.</p>
-                </div>
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.3s">
-                    <i class="fa fa-hand-holding-usd fa-5x text-primary mb-4"></i>
-                    <h4>Suscripción accesible</h4>
-                    <p class="mb-0">Planes simples y transparentes. Elegís el que mejor se adapte a tu negocio, sin costos ocultos y con la tranquilidad de saber que siempre podés crecer.</p>
-                </div>
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.5s">
-                    <i class="fa fa-check fa-5x text-primary mb-4"></i>
-                    <h4>Imagen profesional</h4>
-                    <p class="mb-0">Tus clientes notarán la diferencia: un canal ordenado, disponible 24/7, que transmite seriedad y confianza. SAM no solo organiza tu trabajo, también mejora cómo se ve tu negocio.</p>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <!-- Feature End -->
 
     <section class="container-fluid py-5 bg-light text-dark">
         <div class="container text-center">
@@ -250,45 +225,6 @@
             </video>
         </div>
     </section>
-
-    <!-- About Start -->
-    <!-- <div class="container-fluid py-5 bg-light">
-        <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-6">
-                    <div class="row">
-                        <div class="col-6 wow fadeIn" data-wow-delay="0.1s">
-                            <img class="img-fluid" src="img/about-1.jpg" alt="">
-                        </div>
-                        <div class="col-6 wow fadeIn" data-wow-delay="0.3s">
-                            <img class="img-fluid h-75" src="img/about-2.jpg" alt="">
-                            <div class="h-25 d-flex align-items-center text-center bg-primary px-4">
-                                <h4 class="text-white lh-base mb-0">Award Winning Studio Since 1990</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                    <h1 class="mb-5">Sobre <span class="text-uppercase text-primary bg-light px-2">Nosotros</span></h1>
-                    <p class="mb-4">SAM nació como un proyecto de dos estudiantes de la Facultad de Ciencias Exactas de la Universidad Nacional del Centro (UNICEN), en Tandil. Desde nuestras primeras experiencias académicas y laborales vimos de cerca cómo los negocios y profesionales pierden tiempo valioso atendiendo mensajes y coordinando turnos de manera manual.</p>
-                    <p class="mb-5">Con ese problema en mente, decidimos aplicar nuestros conocimientos en inteligencia artificial y desarrollo de software para crear una solución práctica, accesible y 100% pensada para las necesidades reales de emprendedores, comercios y empresas: un asistente automatizado por WhatsApp que centraliza la gestión y organiza el trabajo diario.</p>
-
-                    <div class="d-flex align-items-center mt-5">
-                        <a class="btn btn-primary px-4 me-2" href="#!">Ver más</a>
-                        <a class="btn btn-outline-primary btn-square border-2 me-2" href="#!"><i
-                                class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-primary btn-square border-2 me-2" href="#!"><i
-                                class="fab fa-twitter"></i></a>
-                        <a class="btn btn-outline-primary btn-square border-2 me-2" href="#!"><i
-                                class="fab fa-instagram"></i></a>
-                        <a class="btn btn-outline-primary btn-square border-2" href="#!"><i
-                                class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <!-- About End -->
 
     <!-- Servicios Start -->
     <div id="planes" class="container-fluid py-5">
@@ -385,10 +321,10 @@
                             <small class="mb-2">Ingeniera en Sistemas</small>
                             <h4 class="lh-base text-light">Amaiké Gopar</h4>
                             <div class="d-flex justify-content-center">
-                                <a class="btn btn-outline-primary btn-sm-square border-2 me-2" href="#!">
+                                <a class="btn btn-outline-primary btn-sm-square border-2 me-2" href="https://www.instagram.com/amaikegopar/">
                                     <i class="fab fa-instagram"></i>
                                 </a>
-                                <a class="btn btn-outline-primary btn-sm-square border-2 " href="#!">
+                                <a class="btn btn-outline-primary btn-sm-square border-2 " href="https://www.linkedin.com/in/amaike-gopar/">
                                     <i class="fab fa-linkedin-in"></i>
                                 </a>
                             </div>
@@ -402,10 +338,10 @@
                             <small class="mb-2">Ingeniera en Sistemas</small>
                             <h4 class="lh-base text-light">Melisa Messa</h4>
                             <div class="d-flex justify-content-center">
-                                <a class="btn btn-outline-primary btn-sm-square border-2 me-2" href="#!">
+                                <a class="btn btn-outline-primary btn-sm-square border-2 me-2" href="https://www.instagram.com/melimessa_/">
                                     <i class="fab fa-instagram"></i>
                                 </a>
-                                <a class="btn btn-outline-primary btn-sm-square border-2" href="#!">
+                                <a class="btn btn-outline-primary btn-sm-square border-2" href="https://www.linkedin.com/in/melisa-messa/">
                                     <i class="fab fa-linkedin-in"></i>
                                 </a>
                             </div>
@@ -427,27 +363,28 @@
                     </a>
                     <p class="mb-0">Sistema Automatizado de Mensajes</p>
                 </div>
-                <div class="col-md-6 col-lg-9 wow fadeIn row" data-wow-delay="0.3s">
+                <div class="col-md-6 col-lg-6 wow fadeIn row" data-wow-delay="0.3s">
                     <h5 class="text-white text-center">Contactanos</h5>
-                    <div class="col-4">
+                    <div class="col-6">
                         <p><i class="fa fa-map-marker-alt me-3"></i>Tandil, Bs As, Argentina</p>
+                        <p><i class="fa fa-envelope me-3"></i>sambusiness078@gmail.com</p>
                     </div>
-                    <div class="col-4">
+                    <div class="col-6 text-end">
                         <p><i class="fa fa-phone-alt me-3"></i>+54 9 2494 31-3101</p>
                         <p><i class="fa fa-phone-alt me-3"></i>+54 9 2494 66-3349</p>
                     </div>
-                    <div class="col-4">
-                        <p><i class="fa fa-envelope me-3"></i>sambusiness078@gmail.com</p>
-                        <div class="d-flex pt-2">
+                    
+                </div>
+                <div class="col-md-12 col-lg-3 wow fadeIn row" data-wow-delay="0.3s">
+                    <h5 class="text-white text-center">Redes sociales</h5>
+                        <div class="d-flex justify-content-center">
                             <a class="btn btn-outline-primary btn-square border-2 me-2" href="#!"><i
                                     class="fab fa-youtube"></i></a>
                             <a class="btn btn-outline-primary btn-square border-2 me-2" href="#!"><i
                                     class="fab fa-instagram"></i></a>
-                            <a class="btn btn-outline-primary btn-square border-2 me-2" href="#!"><i
+                            <a class="btn btn-outline-primary btn-square border-2" href="#!"><i
                                     class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                    
+                        </div>                    
                 </div>
                 
             </div>

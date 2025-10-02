@@ -125,6 +125,21 @@
     }
 
 }
+.offcanvas {
+    width: 250px; /* ancho del sidebar */
+}
+
+.offcanvas .nav-link {
+    padding: 1rem 0;
+    font-size: 1.1rem;
+}
+
+.offcanvas .nav-link:hover {
+    background-color: var(--bs-primary);
+    color: #fff;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
 
 /* @media (min-width: 992px) {
     .navbar .nav-item .dropdown-menu {
@@ -162,6 +177,7 @@
 .hero-title {
     color: var(--bs-light);
 }
+
 
 @media (max-width: 992px) { 
     .hero-header {

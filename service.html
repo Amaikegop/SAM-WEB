@@ -47,37 +47,55 @@
     <!-- Spinner End -->
 
 
-    <!-- Navbar Start -->
+        <!-- Navbar Start -->
     <div class="container-fluid sticky-top">
         <div class="container">
             <nav class="navbar navbar-expand-lg">
                 <a href="index.html" class="navbar-brand">
                     <img id="navbar-logo" src="img/SAM(tranparente).png" alt="">
-                    <!-- <img class="" src="img/SAM(negativo-transparente).png" alt=""> -->
                 </a>
-                <button type="button" class="navbar-toggler ms-auto me-0" data-bs-toggle="collapse"
-                    data-bs-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
+
+                <!-- Botón para abrir sidebar -->
+                <button class="btn d-lg-none ms-auto" type="button" data-bs-toggle="offcanvas" 
+                        data-bs-target="#mobileMenu" aria-controls="mobileMenu">
+                    <i class="bi bi-list fs-1"></i>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
+
+                <!-- Menú normal para desktop -->
+                <div class="collapse navbar-collapse d-none d-lg-flex" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
                         <a href="index.html" class="nav-item nav-link">Inicio</a>
                         <a href="about.html" class="nav-item nav-link">Nosotros</a>
-                        <a href="service.html" class="nav-item nav-link active">Servicios</a>
+                        <a href="service.html" class="nav-item nav-link">Servicios</a>
                         <a href="contact.html" class="nav-item nav-link">Contacto</a>
                     </div>
                 </div>
             </nav>
         </div>
     </div>
-    <!-- Navbar End -->
+
+    <!-- Offcanvas menú para móviles -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="mobileMenuLabel">Menú</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="navbar-nav flex-column">
+                <a href="index.html" class="nav-item nav-link active">Inicio</a>
+                <a href="about.html" class="nav-item nav-link">Nosotros</a>
+                <a href="service.html" class="nav-item nav-link">Servicios</a>
+                <a href="contact.html" class="nav-item nav-link">Contacto</a>
+            </div>
+        </div>
+    </div>
 
      <!-- Hero Start -->
     <div class="container-fluid pb-5 bg-primary hero-header">
         <div class="container py-5">
             <div class="row g-3 align-items-center">
                 <div class="col-12 text-center text-lg-end">
-                    <h1 class="display-1 mb-0 animated slideInLeft text-light">Servicios</h1>
+                    <h1 class="display-1 mb-0 animated slideInLeft">Servicios</h1>
                 </div>
             </div>
         </div>
@@ -87,7 +105,7 @@
     <!-- ================== SECCIÓN 1: Cómo funciona SAM ================== -->
     <div class="container-fluid py-5 bg-light" id="funciona">
         <div class="container">
-            <div class="row align-items-center flex-column-reverse flex-md-row g-4">
+            <div class="row align-items-center flex-column flex-md-row g-4">
             
             <!-- Columna derecha: Texto -->
                 <div class="col-md-6">
@@ -114,9 +132,9 @@
                 </div>
 
             <!-- Columna izquierda: Video -->
-            <div class="col-md-6">
-                <div class="ratio ratio-16x9 shadow-sm rounded">
-                    <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Demostración de SAM" allowfullscreen></iframe>
+            <div class="col-md-6 text-center">
+                <div class="shadow-sm rounded">
+                    <video class="demo" src="img/whatsapp.mp4" title="Demostración de SAM" allowfullscreen autoplay loop></video>
                 </div>
             </div>
 
@@ -269,23 +287,23 @@
 
     <!-- ================== SECCIÓN 4: Detalle de los planes ================== -->
     <div class="container-fluid py-5" id="detalle">
-    <div class="container">
-        <h2 class="text-center fw-bold mb-5">Detalle de cada <span class="text-primary">Plan</span></h2>
-        <div class="row g-4">
-        <div class="col-md-4">
-            <h4 class="fw-bold text-primary">Plan Básico</h4>
-            <p>Ideal para quienes recién empiezan. Te permite gestionar turnos de forma organizada, con respuestas personalizadas y un panel de administración sencillo.</p>
+        <div class="container">
+            <h2 class="text-center fw-bold mb-5">Detalle de cada <span class="text-primary">Plan</span></h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h4 class="fw-bold text-primary">Plan Básico</h4>
+                    <p>Ideal para quienes recién empiezan. Te permite gestionar turnos de forma organizada, con respuestas personalizadas y un panel de administración sencillo.</p>
+                </div>
+                <div class="col-md-4">
+                    <h4 class="fw-bold text-primary">Plan Premium</h4>
+                    <p>Pensado para negocios en crecimiento. Incluye recordatorios automáticos, estadísticas detalladas y gestión de pagos, además de soporte más cercano vía WhatsApp.</p>
+                </div>
+                <div class="col-md-4">
+                    <h4 class="fw-bold text-primary">Plan Personalizado</h4>
+                    <p>La solución más completa. Adaptamos SAM a tus necesidades particulares, con integraciones especiales, atención prioritaria y escalabilidad garantizada.</p>
+                </div>
+            </div>
         </div>
-        <div class="col-md-4">
-            <h4 class="fw-bold text-primary">Plan Premium</h4>
-            <p>Pensado para negocios en crecimiento. Incluye recordatorios automáticos, estadísticas detalladas y gestión de pagos, además de soporte más cercano vía WhatsApp.</p>
-        </div>
-        <div class="col-md-4">
-            <h4 class="fw-bold text-primary">Plan Personalizado</h4>
-            <p>La solución más completa. Adaptamos SAM a tus necesidades particulares, con integraciones especiales, atención prioritaria y escalabilidad garantizada.</p>
-        </div>
-        </div>
-    </div>
     </div>
 
     
@@ -293,53 +311,49 @@
     <!-- Footer Start -->
     <div class="container-fluid bg-secondary text-white-50 footer pt-2">
         <div class="container py-3">
-            <div class="row">
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
+            <div class="row text-center text-md-start">
+            
+                <!-- Logo -->
+                <div class="col-12 col-md-6 col-lg-3 mb-3 wow fadeIn" data-wow-delay="0.1s">
                     <a href="index.html" class="d-inline-block mb-3">
-                        <img class="img" src="img/SAM(negativo-transparente).png" alt="">
+                    <img class="img-fluid" src="img/SAM(negativo-transparente).png" alt="">
                     </a>
-                    <p class="mb-0">Sistema Automatizado de Mensajes</p>
-                </div>
-                <div class="col-md-6 col-lg-6 wow fadeIn row" data-wow-delay="0.3s">
-                    <h5 class="text-white text-center">Contactanos</h5>
-                    <div class="col-6">
-                        <p><i class="fa fa-map-marker-alt me-3"></i>Tandil, Bs As, Argentina</p>
-                        <p><i class="fa fa-envelope me-3"></i>sambusiness078@gmail.com</p>
-                    </div>
-                    <div class="col-6 text-end">
-                        <p><i class="fa fa-phone-alt me-3"></i>+54 9 2494 31-3101</p>
-                        <p><i class="fa fa-phone-alt me-3"></i>+54 9 2494 66-3349</p>
-                    </div>
-                    
-                </div>
-                <div class="col-md-12 col-lg-3 wow fadeIn row" data-wow-delay="0.3s">
-                    <h5 class="text-white text-center">Redes sociales</h5>
-                        <div class="d-flex justify-content-center">
-                            <a class="btn btn-outline-primary btn-square border-2 me-2" href="#!"><i
-                                    class="fab fa-youtube"></i></a>
-                            <a class="btn btn-outline-primary btn-square border-2 me-2" href="#!"><i
-                                    class="fab fa-instagram"></i></a>
-                            <a class="btn btn-outline-primary btn-square border-2" href="#!"><i
-                                    class="fab fa-linkedin-in"></i></a>
-                        </div>                    
+                    <p class="mb-0">Sistema Automatizado </p>
+                    <p class="mb-0"> de Mensajes</p>
                 </div>
                 
+                <!-- Contacto -->
+                <div class="col-12 col-md-6 col-lg-6 mb-3 wow fadeIn" data-wow-delay="0.3s">
+                    <h5 class="text-white text-center mb-3">Contactanos</h5>
+                    <div class="row">
+                        <div class="col-12 col-sm-6 text-center text-sm-start">
+                            <p><i class="fa fa-map-marker-alt me-2"></i>Tandil, Bs As, Argentina</p>
+                            <p><i class="fa fa-envelope me-2"></i>sambusiness078@gmail.com</p>
+                        </div>
+                        <div class="col-12 col-sm-6 text-center text-sm-end">
+                            <p><i class="fa fa-phone-alt me-2"></i>+54 9 2494 31-3101</p>
+                            <p><i class="fa fa-phone-alt me-2"></i>+54 9 2494 66-3349</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Redes Sociales -->
+                <div class="col-12 col-md-12 col-lg-3 mb-3 wow fadeIn" data-wow-delay="0.3s">
+                    <h5 class="text-white text-center mb-3">Redes sociales</h5>
+                        <div class="d-flex justify-content-center">
+                        <a class="btn btn-outline-primary btn-square border-2 me-2" href="#"><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-outline-primary btn-square border-2 me-2" href="#"><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-outline-primary btn-square border-2" href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
+        
+        <!-- Copy -->
         <div class="container wow fadeIn" data-wow-delay="0.1s">
-            <div class="copyright">
-                <div class="row">
-                    <div class="col-12 text-center mb-3 mb-md-0">
-                        <a class="border-bottom text-center" href="#!">SAM - Sistema Automatizado de Mensajes</a>, All Right Reserved.
-                    </div>
-                    <!-- <div class="col-md-6 text-center text-md-end">
-                        <div class="footer-menu">
-                            <a href="#!">Home</a>
-                            <a href="#!">Cookies</a>
-                            <a href="#!">Help</a>
-                            <a href="#!">FAQs</a>
-                        </div>
-                    </div> -->
+            <div class="row">
+                <div class="col-12 text-center mb-3 mb-md-0">
+                    <p>SAM - Sistema Automatizado de Mensajes, Todos los derechos reservados.</p>
                 </div>
             </div>
         </div>

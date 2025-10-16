@@ -1,0 +1,145 @@
+<!-- index.html
+  Minimal "simula WhatsApp" + WebSocket client.
+  - Ajustá la URL DE WEBSOCKET en WS_URL si es necesario.
+  - Presioná Enter para enviar.
+-->
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mini WhatsApp - Demo Bot</title>
+  <style>
+    :root{
+      --bg:#e5ddd5; --panel:#ffffff; --mine:#dcf8c6; --theirs:#ffffff;
+      --accent:#128c7e; --muted:#8a8a8a; --box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    html,body{height:100%;margin:0;background:var(--bg);}
+    .app{max-width:420px;margin:24px auto;height:80vh;display:flex;flex-direction:column;border-radius:14px;overflow:hidden;box-shadow:var(--box-shadow);}
+    .header{background:linear-gradient(90deg,#075e54 0%, #128c7e 100%);color:#fff;padding:12px 16px;display:flex;align-items:center;gap:12px;}
+    .header .title{font-weight:600}
+    .chat{flex:1;display:flex;flex-direction:column;padding:12px;gap:8px;overflow:auto;background-image:linear-gradient(transparent,rgba(0,0,0,0.02));}
+    .bubble{max-width:78%;padding:8px 12px;border-radius:10px;box-shadow:0 1px 0 rgba(0,0,0,0.05);word-wrap:break-word;}
+    .bubble.theirs{align-self:flex-start;background:var(--theirs);}
+    .bubble.mine{align-self:flex-end;background:var(--mine);}
+    .meta{font-size:11px;color:var(--muted);margin-top:6px;text-align:right;}
+    .inputbar{display:flex;padding:10px;background:var(--panel);gap:8px;align-items:center;}
+    .inputbar input{flex:1;padding:10px;border-radius:20px;border:1px solid #ddd;outline:none;font-size:14px;}
+    .inputbar button{background:var(--accent);color:#fff;border:none;padding:10px 14px;border-radius:20px;cursor:pointer;}
+    .status{font-size:12px;color:#fff;opacity:0.95;margin-left:auto}
+    .small{font-size:12px;color:var(--muted)}
+    .system{align-self:center;font-size:12px;color:var(--muted);padding:6px 10px;background:rgba(255,255,255,0.6);border-radius:10px}
+    .typing{font-style:italic;color:var(--muted);font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="app" role="application" aria-label="Chat bot">
+    <div class="header">
+      <img src="img/SAM-logo-alternativo.png" style="width:44px;height:44px;border-radius:50%;background:rgba(255, 255, 255, 0.185);display:flex;align-items:center;justify-content:center;font-weight:600">
+      <div>
+        <div class="title">SAM</div>
+        <div class="small">Conectando...</div>
+      </div>
+      <div class="status" id="status">desconectado</div>
+    </div>
+
+    <div id="chat" class="chat" aria-live="polite" aria-relevant="additions">
+      <div class="system">Esta es una demo para realizar pruebas. El negocio vinculado es ficticio.</div>
+    </div>
+
+    <div class="inputbar">
+      <input id="input" type="text" placeholder="Escribí un mensaje..." autocomplete="off" />
+      <button id="send">Enviar</button>
+    </div>
+  </div>
+
+  <script>
+    // Cambiá la URL si tu WS corre en otra dirección
+    const WS_URL = "wss://sam-5cg5.onrender.com/ws";
+    const chat = document.getElementById("chat");
+    const input = document.getElementById("input");
+    const sendBtn = document.getElementById("send");
+    const statusEl = document.getElementById("status");
+
+    let ws;
+    let reconnectInterval = 2000;
+
+    function addBubble(text, who="theirs", time=null) {
+      const wrap = document.createElement("div");
+      const bubble = document.createElement("div");
+      bubble.className = "bubble " + (who === "me" ? "mine" : "theirs");
+      bubble.textContent = text;
+      wrap.appendChild(bubble);
+      if (time) {
+        const meta = document.createElement("div");
+        meta.className = "meta";
+        meta.textContent = time;
+        wrap.appendChild(meta);
+      }
+      chat.appendChild(wrap);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    function addSystem(text) {
+      const el = document.createElement("div");
+      el.className = "system";
+      el.textContent = text;
+      chat.appendChild(el);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    function setStatus(s) {
+      statusEl.textContent = s;
+    }
+
+    function connect() {
+      ws = new WebSocket(WS_URL);
+
+      ws.onopen = () => {
+        setStatus("conectado");
+        // update header small text
+        document.querySelector(".header .small").textContent = "En línea";
+      };
+
+      ws.onmessage = (evt) => {
+        // asumimos texto plano chunks desde el servidor
+        const txt = evt.data;
+    
+        addBubble(txt, "theirs", new Date().toLocaleTimeString());
+    }
+
+      ws.onclose = () => {
+        setStatus("desconectado");
+        document.querySelector(".header .small").textContent = "Reconectando...";
+        // intentamos reconectar
+        setTimeout(connect, reconnectInterval);
+      };
+
+      ws.onerror = (err) => {
+        console.error("WebSocket error:", err);
+        ws.close();
+      };
+    }
+
+    sendBtn.addEventListener("click", sendMessage);
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") sendMessage();
+    });
+
+    function sendMessage() {
+      const text = input.value.trim();
+      if (!text || ws.readyState !== WebSocket.OPEN) return;
+      // mostrar en UI como mensaje del usuario
+      addBubble(text, "me", new Date().toLocaleTimeString());
+      // enviar al servidor (solo texto)
+      ws.send(text);
+      input.value = "";
+      input.focus();
+    }
+
+    // Arranque
+    connect();
+  </script>
+</body>
+</html>

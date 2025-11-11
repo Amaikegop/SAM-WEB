@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - SAM Empresa</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="/scss/bootstrap.css" />
+    <link rel="stylesheet" href="/sam_dashboard/dashboard.css" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <h4 class="text-center mb-4">SAM</h4>
+      <a href="#" id="home" class="active"><i data-lucide="home"></i> Inicio</a>
+      <a href="#" id="clients"><i data-lucide="users"></i> Clientes</a>
+      <a href="#" id="newClient"
+        ><i data-lucide="user-plus"></i> Nuevo Cliente</a
+      >
+      <hr style="border-color: rgba(255, 255, 255, 0.3)" />
+      <a href="#" id="logout"><i data-lucide="log-out"></i> Cerrar sesión</a>
+    </div>
+
+    <div class="content">
+      <div id="content"></div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  </body>
+</html>

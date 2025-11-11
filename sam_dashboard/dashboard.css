@@ -1,0 +1,88 @@
+/* === Dashboards === */
+
+body {
+  font-family: var(--bs-font-sans-serif);
+  background-color: var(--bs-light);
+  color: var(--bs-secondary);
+  margin: 0;
+  padding: 0;
+}
+
+/* Sidebar */
+.sidebar {
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 240px;
+  background-color: var(--bs-primary);
+  color: var(--bs-white);
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h4 {
+  color: var(--bs-white);
+  font-weight: 700;
+}
+
+.sidebar a {
+  color: var(--bs-white);
+  text-decoration: none;
+  display: block;
+  padding: 10px 20px;
+  border-radius: 6px;
+  margin: 4px 8px;
+  transition: background-color 0.2s ease;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar a i {
+  font-size: 14px;
+  margin-right: 8px;
+  vertical-align: middle;
+  stroke-width: 1.4;
+}
+
+/* Contenido */
+.content {
+  margin-left: 240px;
+  padding: 2rem;
+  min-height: 100vh;
+  background-color: var(--bs-light);
+  color: var(--bs-secondary);
+}
+
+/* Tarjetas del dashboard */
+.card {
+  border: none;
+  border-radius: 12px;
+  background-color: var(--bs-white);
+  color: var(--bs-secondary);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.card h5 {
+  font-weight: 600;
+}
+
+/* Botones */
+.btn-primary {
+  background-color: var(--bs-primary);
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #ff5548;
+}
+
+.btn-success {
+  background-color: var(--bs-green);
+  border: none;
+}

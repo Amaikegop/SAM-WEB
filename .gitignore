@@ -1,0 +1,5 @@
+# --- Archivos sensibles ---
+.env
+*.env
+supabase/.temp/
+supabase/functions/add_client/.npmrc

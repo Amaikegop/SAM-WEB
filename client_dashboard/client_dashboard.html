@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Cliente</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="/scss/bootstrap.css" />
+    <link rel="stylesheet" href="/sam_dashboard/dashboard.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/sam_dashboard/dashboard.css" />
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
+  </head>
+  <div id="toast-container"></div>
+  <body>
+    <div class="sidebar">
+      <h4 class="text-center mb-4">SAM</h4>
+      <a href="#" id="client_home" class="active"
+        ><i data-lucide="home"></i> Inicio</a
+      >
+      <a href="#/calendar" id="client-calendar"
+        ><i data-lucide="calendar-days"></i> Agenda</a
+      >
+      <a href="#/services" id="client-services"
+        ><i data-lucide="briefcase-business"></i> Servicios</a
+      >
+      <a href="#/users" id="client-users"
+        ><i data-lucide="users"></i> Clientes</a
+      >
+      <a href="#/statistics" id="client-statistics"
+        ><i data-lucide="chart-no-axes-combined"></i> Estadísticas</a
+      >
+      <hr style="border-color: rgba(255, 255, 255, 0.3)" />
+      <a href="#/settings" id="settings"
+        ><i data-lucide="settings"></i> Configuración</a
+      >
+      <a href="#" id="logout"><i data-lucide="log-out"></i> Cerrar sesión</a>
+    </div>
+
+    <div class="content">
+      <div id="content"></div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  </body>
+</html>

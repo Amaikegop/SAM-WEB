@@ -76,6 +76,8 @@ body {
 .btn-primary {
   background-color: var(--bs-primary);
   border: none;
+  border-radius: 6px !important;
+  color: white !important;
 }
 
 .btn-primary:hover {
@@ -85,4 +87,130 @@ body {
 .btn-success {
   background-color: var(--bs-green);
   border: none;
+}
+
+/* FullCalendar */
+.fc .fc-toolbar-title {
+  color: var(--bs-secondary) !important;
+  font-weight: 700;
+}
+
+.fc .fc-button {
+  background-color: var(--bs-primary) !important;
+  border: none !important;
+  color: white !important;
+  border-radius: 6px !important;
+  padding: 6px 12px !important;
+  margin: 0 4px !important;
+  font-weight: 500;
+}
+
+.fc .fc-button:hover {
+  background-color: #ff5548 !important;
+}
+
+.fc .fc-button-primary:focus,
+.fc .fc-button-primary:active,
+.fc .fc-button-primary:not(:disabled):active {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Botón activo (día, semana, mes) */
+.fc .fc-button.fc-button-active {
+  background-color: #ff5548 !important;
+  border: none !important;
+}
+
+.fc .fc-prev-button,
+.fc .fc-next-button {
+  margin-right: 2px !important;
+}
+
+/* Nombres de días y números */
+.fc .fc-col-header-cell-cushion,
+.fc .fc-daygrid-day-number {
+  color: var(--bs-secondary) !important;
+  font-weight: 600;
+}
+
+/* Líneas del calendario */
+.fc .fc-scrollgrid,
+.fc .fc-daygrid-day {
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Evento */
+.fc-event {
+  background-color: var(--bs-samlightblue) !important;
+  border: none !important;
+  color: white !important;
+  padding: 4px 6px !important;
+  font-size: 0.85rem !important;
+  border-radius: 6px !important;
+}
+
+/* Hover del evento */
+.fc-event:hover {
+  background-color: #316a79 !important;
+  cursor: pointer;
+}
+
+/* Día actual */
+.fc .fc-day-today {
+  background-color: rgba(255, 107, 61, 0.15) !important;
+}
+
+/* === TOASTS === */
+
+#toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toast-box {
+  min-width: 260px;
+  max-width: 320px;
+  padding: 14px 18px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateX(20px);
+  animation: toast-in 0.25s forwards;
+}
+
+.toast-success {
+  background: #d9f5dc;
+  color: #1c5127;
+  border-left: 6px solid #38a169;
+}
+
+.toast-error {
+  background: #f8d7da;
+  color: #842029;
+  border-left: 6px solid #e63946;
+}
+
+@keyframes toast-in {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes toast-out {
+  to {
+    opacity: 0;
+    transform: translateX(20px);
+  }
 }

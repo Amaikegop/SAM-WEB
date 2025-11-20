@@ -25,7 +25,7 @@ form.addEventListener("submit", async (e) => {
       window.location.href = "sam_dashboard/admin_dashboard.html";
     } else {
       localStorage.setItem("client_id", profile.client_id);
-      window.location.href = "/client_dashboard.html";
+      window.location.href = "client_dashboard/client_dashboard.html";
     }
   }
 });

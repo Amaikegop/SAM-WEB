@@ -1,5 +1,3 @@
-import { supabase } from "../../supabaseClient.js";
-
 export function showNewClientForm(container) {
   container.innerHTML = `
     <h2 class="mb-4">Agregar nuevo cliente</h2>

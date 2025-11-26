@@ -1,7 +1,8 @@
+import { supabase } from "../../../supabaseClient.js";
 import { showHome } from "./home.js";
 import { showClients } from "./clients.js";
 import { showNewClientForm } from "./newClientForm.js";
-import { supabase } from "../../supabaseClient.js";
+import { showSettings } from "../../js/settingsView.js";
 
 const contentDiv = document.getElementById("content");
 
@@ -10,19 +11,26 @@ document.getElementById("home").addEventListener("click", () => {
   activateMenu("home");
   showHome(contentDiv);
 });
+
 document.getElementById("clients").addEventListener("click", () => {
   activateMenu("clients");
   showClients(contentDiv);
 });
+
 document.getElementById("newClient").addEventListener("click", () => {
   activateMenu("newClient");
   showNewClientForm(contentDiv);
 });
 
+document.getElementById("settings").addEventListener("click", () => {
+  activateMenu("settings");
+  showSettings(contentDiv);
+});
+
 // Logout funcional
 document.getElementById("logout").addEventListener("click", async () => {
   await supabase.auth.signOut();
-  window.location.href = "../login.html";
+  window.location.href = "../../login.html";
 });
 
 function activateMenu(id) {

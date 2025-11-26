@@ -1,10 +1,10 @@
 import { showClientCalendar } from "./client_calendar.js";
 import { showClientHome } from "./client_home.js";
 import { showClientUsers } from "./client_users.js";
-import { supabase } from "../../supabaseClient.js";
+import { supabase } from "../../../supabaseClient.js";
 import { showClientStatistics } from "./client_statistics.js";
 import { showClientServices } from "./client_services.js";
-import { showNewServiceForm } from "./newServiceForm.js";
+import { showSettings } from "../../js/settingsView.js";
 
 const contentDiv = document.getElementById("content");
 
@@ -36,6 +36,11 @@ document.getElementById("client-statistics").addEventListener("click", () => {
   showClientStatistics(contentDiv);
 });
 
+document.getElementById("settings").addEventListener("click", () => {
+  activateClientMenu("settings");
+  showSettings(contentDiv);
+});
+
 function activateClientMenu(id) {
   document
     .querySelectorAll(".sidebar a")
@@ -46,6 +51,6 @@ function activateClientMenu(id) {
 // logout
 document.getElementById("logout").addEventListener("click", async () => {
   await supabase.auth.signOut();
-  window.location.href = "../login.html";
+  window.location.href = "../../login.html";
 });
 window.lucide.createIcons();

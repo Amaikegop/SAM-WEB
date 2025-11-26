@@ -1,6 +1,6 @@
-import { supabase } from "../../supabaseClient.js";
+import { supabase } from "../../../supabaseClient.js";
 import { showClientServices } from "./client_services.js";
-import { showToast } from "../../js/utils/toast.js";
+import { showToast } from "../../../js/utils/toast.js";
 
 export async function showNewServiceForm(container) {
   container.innerHTML = `

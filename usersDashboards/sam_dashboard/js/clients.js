@@ -1,6 +1,6 @@
-import { supabase } from "../../supabaseClient.js";
+import { supabase } from "../../../supabaseClient.js";
+import { showLoader } from "../../../js/utils/loader.js";
 import { showNewClientForm } from "./newClientForm.js";
-import { showLoader } from "../../js/utils/loader.js";
 
 export async function showClients(container) {
   showLoader(container);

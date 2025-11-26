@@ -1,7 +1,7 @@
-import { supabase } from "../../supabaseClient.js";
-import { showLoader } from "../../js/utils/loader.js";
+import { supabase } from "../../../supabaseClient.js";
+import { showLoader } from "../../../js/utils/loader.js";
 import { showClientServices } from "./client_services.js";
-import { showToast } from "../../js/utils/toast.js";
+import { showToast } from "../../../js/utils/toast.js";
 
 export async function showEditService(container, serviceId) {
   showLoader(container);

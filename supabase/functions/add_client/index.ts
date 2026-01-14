@@ -59,10 +59,21 @@ Deno.serve(async (req) => {
 
     if (!pdfFile) throw new Error("No se proporcionó un archivo PDF.");
 
-    const supabase = createClient(
-      Deno.env.get("PROJECT_URL")!,
-      Deno.env.get("SERVICE_ROLE_KEY")!
-    );
+    // const supabase = createClient(
+    //   Deno.env.get("PROJECT_URL")!,
+    //   Deno.env.get("SERVICE_ROLE_KEY")!
+    // );
+
+    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+    const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+
+    if (!supabaseUrl || !serviceRoleKey) {
+      throw new Error(
+        "Faltan SUPABASE_URL o SUPABASE_SERVICE_ROLE_KEY en los secrets."
+      );
+    }
+
+    const supabase = createClient(supabaseUrl, serviceRoleKey);
 
     // Subida del pdf al storage bucket
     const filePath = `client/${client_id}.pdf`;
@@ -97,7 +108,6 @@ Deno.serve(async (req) => {
         doc: docUrl,
         active: true,
         created_at: new Date().toISOString(),
-        email,
       },
     ]);
 
@@ -107,7 +117,7 @@ Deno.serve(async (req) => {
 
     const { error: insertProfilesError } = await supabase
       .from("profiles")
-      .insert([{ id: createdUser.id, client_id, role: "client_admin" }]);
+      .insert([{ id: createdUser.id, client_id, role: "client_admin", email }]);
 
     if (insertProfilesError) throw insertProfilesError;
 

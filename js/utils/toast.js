@@ -14,6 +14,6 @@ export function showToast(message, type = "success", duration = 3000) {
 
   setTimeout(() => {
     toast.style.animation = "toast-out 0.25s forwards";
-    setTimeout(() => toast.remove(), 250);
+    setTimeout(() => toast.remove(), 3000);
   }, duration);
 }

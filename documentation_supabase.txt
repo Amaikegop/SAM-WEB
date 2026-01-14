@@ -1,0 +1,117 @@
+Backup por si se pausa de nuevo:
+
+Creación de la Edge Function -> add_client/index.ts
+
+En storage creación del guardado de pdfs del cliente -> client_docs (PUBLIC)
+
+En Authentication creación manual del perfil del superadmin que sería la empresa con el mail de SAM.
+
+########################################################################################################
+########################################################################################################
+########################################################################################################
+
+$$$$$$$$$$ SQL $$$$$$$$$$$$$
+
+-- TABLA PROFILES --
+-- TABLES CREATION --
+
+-- PROFILES
+create table profiles (
+  id uuid references auth.users on delete cascade,
+  client_id character varying references client(id),
+  role text check (role in ('superadmin', 'client_admin')) not null,
+  primary key (id)
+);
+
+-- INSERT SUPERADMIN EN PROFILE
+insert into profiles (id, role, client_id)
+values (
+  '2bf223de-3478-49ff-af34-0814e1610f86',
+  'superadmin',
+  null
+);
+
+alter table profiles add column email text;
+
+########################################################################################################
+########################################################################################################
+########################################################################################################
+
+-- POLITICAS RLS --
+
+-- RLS
+
+alter table client enable row level security;
+alter table "user" enable row level security;
+alter table appointment enable row level security;
+alter table profiles enable row level security;
+
+########################################################################################################
+########################################################################################################
+########################################################################################################
+
+-- POLITICAS DEL PERFIL SUPERADMIN --
+-- SUPERADMIN --
+create policy "superadmin can read clients"
+on client
+for select
+using (
+  exists (
+    select 1 from profiles
+    where profiles.id = auth.uid()
+    and profiles.role = 'superadmin'
+  )
+);
+
+create policy "superadmin can read users"
+on "user"
+for select
+using (
+  exists (
+    select 1 from profiles
+    where profiles.id = auth.uid()
+    and profiles.role = 'superadmin'
+  )
+);
+
+create policy "superadmin can read appointments"
+on appointment
+for select
+using (
+  exists (
+    select 1 from profiles
+    where profiles.id = auth.uid()
+    and profiles.role = 'superadmin'
+  )
+);
+
+CREATE POLICY "Allow select own profile"
+ON profiles
+FOR SELECT
+USING ( auth.uid() = id );
+
+CREATE POLICY "Allow insert from service role"
+ON profiles
+FOR INSERT
+WITH CHECK (true);
+
+CREATE POLICY "Allow insert from service role"
+ON client
+FOR INSERT
+WITH CHECK (true);
+
+########################################################################################################
+########################################################################################################
+########################################################################################################
+
+-- MODIFICACIONES EN TABLE CLIENTE --
+-- Table client
+
+alter table client
+add column created_at timestamptz not null default now();
+
+alter table client
+add column active boolean not null default true;
+
+
+

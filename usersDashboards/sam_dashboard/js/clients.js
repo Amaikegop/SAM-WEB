@@ -8,7 +8,7 @@ export async function showClients(container) {
   try {
     const { data: clients, error: errorClients } = await supabase
       .from("client")
-      .select("id, fullname, created_at, active, email, user(id)");
+      .select("id, fullname, created_at, active, user:user_client_id_fkey(id)");
     console.log("CLIENTES:", clients);
 
     if (errorClients) throw errorClients;
@@ -18,7 +18,7 @@ export async function showClients(container) {
         <button class="btn btn-primary mb-3" id="btn-new-client">Agregar cliente</button>
         <table class="table table-bordered">
           <thead>
-            <tr><th>Nombre</th><th>Email</th><th>Estado</th><th>Usuarios</th></tr>
+            <tr><th>Nombre</th><th>Estado</th><th>Usuarios</th></tr>
           </thead>
           <tbody id="clients-table">
             <tr><td colspan="4">Cargando...</td></tr>
@@ -32,7 +32,6 @@ export async function showClients(container) {
         return `
         <tr>
           <td>${c.fullname}</td>
-          <td>${c.email}</td>
           <td>${c.active ? "Activo" : "Inactivo"}</td>
           <td>${userCount}</td>
         </tr>
@@ -47,7 +46,7 @@ export async function showClients(container) {
     console.error("Error al cargar los clientes:", error);
     document.getElementById(
       "clients-table"
-    ).innerHTML = `<tr><td colspan="3">Error al cargar datos</td></tr>`;
+    ).innerHTML = `<tr><td colspan="3">Error al cargar los clientes</td></tr>`;
   }
 }
 
@@ -55,7 +54,9 @@ async function loadClients() {
   try {
     const { data: clients, error: errorClients } = await supabase
       .from("client")
-      .select("id, fullname, created_at, active, email, user(id)");
+      .select(
+        "id, fullname, created_at, active, email, user:user_client_id_fkey(id)"
+      );
     console.log("CLIENTES:", clients);
 
     if (errorClients) throw errorClients;

@@ -2,13 +2,14 @@ import { supabase } from "../../../supabaseClient.js";
 import { showLoader } from "../../../js/utils/loader.js";
 import { showClientServices } from "./client_services.js";
 import { showToast } from "../../../js/utils/toast.js";
+import { confirmModal } from "../../../js/utils/confirmModal.js";
 
 export async function showEditService(container, serviceId) {
   showLoader(container);
   try {
     const { data: service, error } = await supabase
       .from("service")
-      .select("id, description, price, duration, simultaneous")
+      .select("id, description, price, duration, simultaneous, name")
       .eq("id", serviceId)
       .single();
 
@@ -30,7 +31,7 @@ export async function showEditService(container, serviceId) {
           <div class="mb-3">
             <label class="form-label">Nombre del servicio</label>
             <input class="form-control" id="serviceNameInput"
-              value="Aca iria el nombre del servicio">
+              value="${service.name}">
           </div>
           <div class="mb-3">
             <label class="form-label">Descripción del servicio</label>
@@ -88,6 +89,7 @@ export async function showEditService(container, serviceId) {
 
         try {
           const updated = {
+            name: document.getElementById("serviceNameInput").value.trim(),
             description: document
               .getElementById("serviceDescriptionInput")
               .value.trim(),
@@ -117,7 +119,15 @@ export async function showEditService(container, serviceId) {
     document
       .getElementById("btn-delete-service")
       .addEventListener("click", async () => {
-        if (!confirm("¿Seguro que querés eliminar este servicio?")) return;
+        const okModal = await confirmModal({
+          title: "Eliminar servicio",
+          message: `¿Seguro que querés eliminar el servicio de <b>${service.name}</b>?<br><small class="text-muted">Esta acción no se puede deshacer.</small>`,
+          confirmText: "Sí, eliminar",
+          cancelText: "No",
+          confirmBtnClass: "btn-primary",
+        });
+
+        if (!okModal) return;
 
         try {
           const { error: deleteError } = await supabase

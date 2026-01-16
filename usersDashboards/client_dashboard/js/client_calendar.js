@@ -1,5 +1,6 @@
 import { supabase } from "../../../supabaseClient.js";
 import { showLoader } from "../../../js/utils/loader.js";
+import { viewAppointment } from "./client_view_appointment.js";
 
 export async function showClientCalendar(container) {
   showLoader(container);
@@ -24,19 +25,22 @@ export async function showClientCalendar(container) {
     }
 
     const clientUsersID = client_users.map((u) => u.id);
+    console.log(clientUsersID);
 
     const { data: appointment, errorAppointment } = await supabase
       .from("appointment")
       .select(
-        "id, start, user:user_id(id, fullname), service:service_id(id, description)"
+        "id, start, user:user!appointment_user_id_user_client_id_fkey(id, fullname), user_client_id, service:service_id(id, description, name)"
       )
-      .in("user_id", clientUsersID);
+      .in("user_id", clientUsersID.map(String));
 
     if (errorAppointment) throw errorAppointment;
+    console.log(appointment);
 
     const events = appointment.map((ap) => ({
       id: ap.id,
-      title: `${ap.service.description} - ${ap.user.fullname}`,
+      title: `${ap.user.fullname}`,
+      //title: `${ap.service.name}`,
       start: ap.start,
     }));
 
@@ -61,10 +65,15 @@ export async function showClientCalendar(container) {
         dayMaxEvents: 2,
         events: events,
         eventClick: function (info) {
-          alert(
-            `Turno: ${
-              info.event.title
-            }\nInicio: ${info.event.start.toLocaleString()}`
+          const appointmentId =
+            info.event.id || info.event.extendedProps?.appointment_id;
+          if (!appointmentId) {
+            console.error("El evento no tiene id de appointment:", info.event);
+            return;
+          }
+
+          viewAppointment(container, appointmentId, () =>
+            showClientCalendar(container)
           );
         },
         dateClick(info) {

@@ -14,7 +14,7 @@ export async function showClientServices(container) {
 
     const { data: services, error: servicesError } = await supabase
       .from("service")
-      .select("id, description, price, duration, simultaneous")
+      .select("id, description, price, duration, simultaneous, name")
       .eq("client_id", client_id);
 
     if (servicesError) throw servicesError;
@@ -86,8 +86,8 @@ function renderCards(list, container) {
       <div class="col">
         <div class="card shadow-sm h-100">
           <div class="card-body">
-            <h5 class="card-title">${s.description}</h5>
-            <p class="card-text">Está debería de ser la descripción larga del servicio.</p>
+            <h5 class="card-title">${s.name}</h5>
+            <p class="card-text">${s.description}</p>
             <p class="card-text"><strong>Precio:</strong> ${s.price}</p>
             <p class="card-text"><strong>Cantidad:</strong> ${s.simultaneous}</p>
             <a href="#" class="btn btn-primary w-100 edit-service-btn" data-id="${s.id}">

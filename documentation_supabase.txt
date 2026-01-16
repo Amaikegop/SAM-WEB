@@ -45,6 +45,7 @@ alter table client enable row level security;
 alter table "user" enable row level security;
 alter table appointment enable row level security;
 alter table profiles enable row level security;
+alter table service enable row level security;
 
 ########################################################################################################
 ########################################################################################################
@@ -104,6 +105,80 @@ WITH CHECK (true);
 ########################################################################################################
 ########################################################################################################
 
+-- CLIENT_ADMIN POLICIES
+
+create policy "client can read his own users"
+on public."user"
+for SELECT
+using (exists(
+  select 1 from public.profiles p
+  where p.id = auth.uid() and p.role = 'client_admin' and p.client_id = public."user".client_id
+));
+
+create policy "client manages own services"
+on public.service
+for all
+using(
+  exists(
+    select 1 from public.profiles p
+    where p.id = auth.uid() and p.role = 'client_admin' and p.client_id = service.client_id
+  )
+)
+with check(
+  exists(
+    select 1 from public.profiles p
+    where p.id = auth.uid() and p.role = 'client_admin' and p.client_id = service.client_id
+  )
+);
+
+create policy "client_admin manages appointments of their users"
+on public.appointment
+for all
+using (
+  exists (
+    select 1
+    from public.profiles p
+    where p.id = auth.uid()
+      and p.role = 'client_admin'
+      and p.client_id = appointment.user_client_id
+  )
+)
+with check (
+  exists (
+    select 1
+    from public.profiles p
+    where p.id = auth.uid()
+      and p.role = 'client_admin'
+      and p.client_id = appointment.user_client_id
+  )
+);
+
+########################################################################################################
+########################################################################################################
+########################################################################################################
+
+-- VIEWS
+
+create or replace view public.v_appointment_detail as
+select
+  a.id as appointment_id,
+  a.start,
+  a.service_id,
+  s.name as service_name,
+  a.user_id,
+  u.fullname as user_fullname,
+  a.user_client_id
+from public.appointment a
+join public.service s
+  on s.id = a.service_id
+join public."user" u
+  on u.id = a.user_id;
+
+
+########################################################################################################
+########################################################################################################
+########################################################################################################
+
 -- MODIFICACIONES EN TABLE CLIENTE --
 -- Table client
 
@@ -112,6 +187,11 @@ add column created_at timestamptz not null default now();
 
 alter table client
 add column active boolean not null default true;
+
+-- Table service
+
+alter table service
+add column name varchar not null default 'def service';
 
 
 

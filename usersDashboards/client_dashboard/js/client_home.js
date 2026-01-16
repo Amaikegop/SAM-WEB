@@ -1,5 +1,8 @@
 import { showLoader } from "../../../js/utils/loader.js";
 import { supabase } from "../../../supabaseClient.js";
+import { cancelAppointmentsOfDay } from "./cancel_appointments.js";
+import { viewAppointment } from "./client_view_appointment.js";
+import { confirmModal } from "../../../js/utils/confirmModal.js";
 
 export async function showClientHome(container) {
   showLoader(container);
@@ -36,12 +39,17 @@ export async function showClientHome(container) {
     const { data: appointment, errorAppointment } = await supabase
       .from("appointment")
       .select(
-        "id, start, user:user_id(id, fullname), service:service_id(id, description)"
+        "id, start, user:user!appointment_user_id_user_client_id_fkey(id, fullname), user_client_id, service:service_id(id, description, name)"
       )
-      .in("user_id", clientUsersID)
+      .in("user_id", clientUsersID.map(String))
       .gte("start", todayStart)
       .lte("start", todayEnd)
       .order("start", { ascending: true });
+
+    if (errorAppointment) {
+      console.error("Supabase errorAppointment:", errorAppointment);
+      throw errorAppointment;
+    }
 
     if (errorAppointment) throw errorAppointment;
 
@@ -69,6 +77,7 @@ export async function showClientHome(container) {
     let html = `
       <div class="d-flex justify-content-between mb-4">
         <h2>Turnos: ${new Date().toLocaleDateString("es-ES")}</h2>
+        <button id="btn-cancel-day-appointments" class="btn btn-sm btn-primary mb-3">Cancelar todos los turnos del día</button>
       </div>
 
         <table class="table table-hover align-middle">
@@ -98,9 +107,11 @@ export async function showClientHome(container) {
           <tr style="background: #82C0CC">
             <td><b>${time}</b></td>
             <td>${ap.user?.fullname || "—"}</td>
-            <td>${ap.service?.description || "—"}</td>
+            <td>${ap.service?.name || "—"}</td>
             <td>
-              <button class="btn btn-sm btn-primary">Modificar</button>
+              <button class="btn btn-sm btn-primary btn-show-appointment" data-id="${
+                ap.id
+              }">Ver</button>
             </td>
           </tr>
         `;
@@ -113,6 +124,36 @@ export async function showClientHome(container) {
     `;
 
     container.innerHTML = html;
+
+    document.querySelectorAll(".btn-show-appointment").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const appointmentId = btn.dataset.id;
+        viewAppointment(container, appointmentId, () =>
+          showClientHome(container)
+        );
+      });
+    });
+
+    document
+      .getElementById("btn-cancel-day-appointments")
+      .addEventListener("click", async () => {
+        const dateValue = new Date().toLocaleDateString("es-ES");
+        const okModal = await confirmModal({
+          title: "Eliminar turno",
+          message: `¿Seguro que querés eliminar todos los turnos del <b>${dateValue}</b>?<br><small class="text-muted">Esta acción no se puede deshacer.</small>`,
+          confirmText: "Sí, eliminar",
+          cancelText: "No",
+          confirmBtnClass: "btn-primary",
+        });
+
+        if (!okModal) return;
+
+        const ok = await cancelAppointmentsOfDay(
+          `${yyyy}-${mm}-${dd}`,
+          clientUsersID
+        );
+        if (ok) showClientHome(container);
+      });
   } catch (error) {
     console.error("Error cargando agenda del día del cliente:", error);
     container.innerHTML = `<p class="text-danger">Error al cargar los turnos del día.</p>`;

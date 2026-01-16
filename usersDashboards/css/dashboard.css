@@ -73,15 +73,24 @@ body {
 }
 
 /* Botones */
-.btn-primary {
-  background-color: var(--bs-primary);
+.btn {
   border: none;
   border-radius: 6px !important;
+}
+
+.btn-primary {
+  background-color: var(--bs-primary);
+  /* border: none;
+  border-radius: 6px !important; */
   color: white !important;
 }
 
 .btn-primary:hover {
   background-color: #ff5548;
+}
+
+.btn-secondary:hover {
+  background-color: #00108a;
 }
 
 .btn-success {

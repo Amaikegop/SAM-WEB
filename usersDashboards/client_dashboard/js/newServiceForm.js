@@ -72,6 +72,7 @@ export async function showNewServiceForm(container) {
 
       const { error: newServiceError } = await supabase.from("service").insert([
         {
+          name: serviceName,
           description: serviceDescription,
           price: servicePrice,
           duration: serviceDuration,

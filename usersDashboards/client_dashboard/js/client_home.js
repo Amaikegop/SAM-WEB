@@ -3,6 +3,7 @@ import { supabase } from "../../../supabaseClient.js";
 import { cancelAppointmentsOfDay } from "./cancel_appointments.js";
 import { viewAppointment } from "./client_view_appointment.js";
 import { confirmModal } from "../../../js/utils/confirmModal.js";
+import { clientNewAppointment } from "./client_new_appointment.js";
 
 export async function showClientHome(container) {
   showLoader(container);
@@ -39,7 +40,7 @@ export async function showClientHome(container) {
     const { data: appointment, errorAppointment } = await supabase
       .from("appointment")
       .select(
-        "id, start, user:user!appointment_user_id_user_client_id_fkey(id, fullname), user_client_id, service:service_id(id, description, name)"
+        "id, start, user:user!appointment_user_id_user_client_id_fkey(id, fullname), user_client_id, service:service_id(id, description, name)",
       )
       .in("user_id", clientUsersID.map(String))
       .gte("start", todayStart)
@@ -71,13 +72,16 @@ export async function showClientHome(container) {
     });
 
     const sortedTimes = Object.keys(schedule).sort((a, b) =>
-      a.localeCompare(b)
+      a.localeCompare(b),
     );
 
     let html = `
       <div class="d-flex justify-content-between mb-4">
         <h2>Turnos: ${new Date().toLocaleDateString("es-ES")}</h2>
-        <button id="btn-cancel-day-appointments" class="btn btn-sm btn-primary mb-3">Cancelar todos los turnos del día</button>
+        <div class="d-flex justify-content-end mx-4">
+          <button id="btn-cancel-day-appointments" class="btn btn-sm btn-primary mb-3 me-2">Cancelar todos los turnos del día</button>
+          <button id="btn-add-appointment" class="btn btn-sm btn-primary mb-3">Nuevo turno</button>
+        </div>
       </div>
 
         <table class="table table-hover align-middle">
@@ -129,7 +133,7 @@ export async function showClientHome(container) {
       btn.addEventListener("click", () => {
         const appointmentId = btn.dataset.id;
         viewAppointment(container, appointmentId, () =>
-          showClientHome(container)
+          showClientHome(container),
         );
       });
     });
@@ -150,9 +154,15 @@ export async function showClientHome(container) {
 
         const ok = await cancelAppointmentsOfDay(
           `${yyyy}-${mm}-${dd}`,
-          clientUsersID
+          clientUsersID,
         );
         if (ok) showClientHome(container);
+      });
+
+    document
+      .getElementById("btn-add-appointment")
+      .addEventListener("click", async () => {
+        clientNewAppointment(container, "date", "onBack");
       });
   } catch (error) {
     console.error("Error cargando agenda del día del cliente:", error);

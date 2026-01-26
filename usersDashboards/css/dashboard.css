@@ -223,3 +223,40 @@ body {
     transform: translateX(20px);
   }
 }
+
+/* === OPTION BUTTON === */
+
+.option-btn {
+  width: 180px;
+  height: 180px;
+  border-radius: 16px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  border: 2px solid #00108a;
+  background-color: #fff;
+  color: #00108a;
+
+  font-size: 1rem;
+  font-weight: 500;
+
+  transition: all 0.2s ease;
+}
+
+.option-btn i {
+  font-size: 3rem;
+}
+
+.option-btn:hover {
+  background-color: #00108a;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.option-btn:active {
+  transform: scale(0.97);
+}

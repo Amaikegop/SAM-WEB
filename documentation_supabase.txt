@@ -194,4 +194,219 @@ alter table service
 add column name varchar not null default 'def service';
 
 
+########################################################################################################
+########################################################################################################
+########################################################################################################
+FUNCIONES
 
+-- APPOINTMENT AVAILABILITY FUNCTION
+create or replace function create_appointment_safe(
+  p_service_id int,
+  p_user_id text,
+  p_client_id text,
+  p_start timestamptz
+)
+returns json
+language plpgsql
+as $$
+declare
+  v_duration interval;
+  v_simultaneous int;
+  v_overlapping int;
+begin
+  -- Obtener duración y simultaneidad
+  select duration, simultaneous
+  into v_duration, v_simultaneous
+  from service
+  where id = p_service_id;
+
+  if not found then
+    return json_build_object(
+      'ok', false,
+      'reason', 'SERVICE_NOT_FOUND'
+    );
+  end if;
+
+  -- Contar solapamientos
+  select count(*)
+  into v_overlapping
+  from appointment a
+  where a.service_id = p_service_id
+    and a.user_client_id = p_client_id
+    and a.start < p_start + v_duration
+    and a.start + v_duration > p_start;
+
+  if v_overlapping >= v_simultaneous then
+    return json_build_object(
+      'ok', false,
+      'reason', 'NO_AVAILABILITY'
+    );
+  end if;
+
+  -- Insertar turno
+  insert into appointment (
+    start,
+    user_id,
+    user_client_id,
+    service_id
+  )
+  values (
+    p_start,
+    p_user_id,
+    p_client_id,
+    p_service_id
+  );
+
+  return json_build_object(
+    'ok', true
+  );
+end;
+$$;
+
+
+-- PERMITIR RPC
+grant execute on function create_appointment_safe to authenticated;
+grant execute on function create_appointment_safe to anon;
+
+-- DELETE SINGLE APPOINTMENT
+create or replace function delete_appointment_safe(
+  p_appointment_id int,
+  p_client_id text
+)
+returns json
+language plpgsql
+as $$
+declare
+  v_exists boolean;
+begin
+  -- Verificar que el turno exista y pertenezca al cliente
+  select true
+  into v_exists
+  from appointment
+  where id = p_appointment_id
+    and user_client_id = p_client_id;
+
+  if not found then
+    return json_build_object(
+      'ok', false,
+      'reason', 'NOT_FOUND_OR_FORBIDDEN'
+    );
+  end if;
+
+  -- Eliminar turno
+  delete from appointment
+  where id = p_appointment_id
+    and user_client_id = p_client_id;
+
+  return json_build_object(
+    'ok', true
+  );
+end;
+$$;
+
+grant execute on function delete_appointment_safe(int, text)
+to anon, authenticated;
+
+-- DELETE APPOINTMENTS OF A DAY
+create or replace function delete_appointments_of_day(
+  p_client_id text,
+  p_date date,
+  p_user_ids text[]
+)
+returns json
+language plpgsql
+as $$
+declare
+  v_count int;
+begin
+  delete from appointment
+  where user_client_id = p_client_id
+    and user_id = any(p_user_ids)
+    and start >= p_date
+    and start < p_date + interval '1 day';
+
+  get diagnostics v_count = row_count;
+
+  return json_build_object(
+    'ok', true,
+    'deleted', v_count
+  );
+end;
+$$;
+
+grant execute on function delete_appointments_of_day(text, date, text[])
+to anon, authenticated;
+
+
+--- UPDATE APPOINTMENT FUNCTION
+create or replace function update_appointment_safe(
+  p_appointment_id int,
+  p_service_id int,
+  p_user_id text,
+  p_client_id text,
+  p_start timestamptz
+)
+returns json
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  v_duration interval;
+  v_simultaneous int;
+  v_overlapping int;
+begin
+  if not exists (
+    select 1
+    from appointment
+    where id = p_appointment_id
+      and user_client_id = p_client_id
+  ) then
+    return json_build_object(
+      'ok', false,
+      'reason', 'NOT_FOUND_OR_FORBIDDEN'
+    );
+  end if;
+
+  select duration, simultaneous
+  into v_duration, v_simultaneous
+  from service
+  where id = p_service_id;
+
+  if not found then
+    return json_build_object(
+      'ok', false,
+      'reason', 'SERVICE_NOT_FOUND'
+    );
+  end if;
+
+  select count(*)
+  into v_overlapping
+  from appointment a
+  where a.service_id = p_service_id
+    and a.user_client_id = p_client_id
+    and a.id <> p_appointment_id
+    and a.start < p_start + v_duration
+    and a.start + v_duration > p_start;
+
+  if v_overlapping >= v_simultaneous then
+    return json_build_object(
+      'ok', false,
+      'reason', 'NO_AVAILABILITY'
+    );
+  end if;
+
+  update appointment
+  set
+    start = p_start,
+    service_id = p_service_id,
+    user_id = p_user_id
+  where id = p_appointment_id;
+
+  return json_build_object('ok', true);
+end;
+$$;
+
+grant execute on function update_appointment_safe(
+  int, int, text, text, timestamptz
+) to anon, authenticated;

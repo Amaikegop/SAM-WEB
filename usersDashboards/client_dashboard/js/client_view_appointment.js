@@ -4,6 +4,7 @@ import { showToast } from "../../../js/utils/toast.js";
 import { showClientHome } from "./client_home.js";
 import { cancelSingleAppointment } from "./cancel_appointments.js";
 import { confirmModal } from "../../../js/utils/confirmModal.js";
+import { updateAppointment } from "../../../js/utils/availability.js";
 
 export async function viewAppointment(container, appointment_id, onBack) {
   showLoader(container);
@@ -44,10 +45,10 @@ export async function viewAppointment(container, appointment_id, onBack) {
             <input type="date" class="form-control"
                 id="appointmentDateInput"
                 value="${new Date(appointment.start).getFullYear()}-${String(
-      new Date(appointment.start).getMonth() + 1
-    ).padStart(2, "0")}-${String(
-      new Date(appointment.start).getDate()
-    ).padStart(2, "0")}">
+                  new Date(appointment.start).getMonth() + 1,
+                ).padStart(2, "0")}-${String(
+                  new Date(appointment.start).getDate(),
+                ).padStart(2, "0")}">
             </div>
 
           <div class="col-md-4">
@@ -55,10 +56,10 @@ export async function viewAppointment(container, appointment_id, onBack) {
                 <input type="time" class="form-control"
                   id="appointmentStartInput"
                   value="${String(
-                    new Date(appointment.start).getHours()
+                    new Date(appointment.start).getHours(),
                   ).padStart(2, "0")}:${String(
-      new Date(appointment.start).getMinutes()
-    ).padStart(2, "0")}">
+                    new Date(appointment.start).getMinutes(),
+                  ).padStart(2, "0")}">
             </div>
         <div class="d-flex justify-content-between mt-4 mb-4">
           <button type="submit" class="btn btn-primary mb-3">
@@ -91,7 +92,7 @@ export async function viewAppointment(container, appointment_id, onBack) {
         (s) =>
           `<option value="${s.id}" ${
             s.id === appointment.service_id ? "selected" : ""
-          }>${s.name}</option>`
+          }>${s.name}</option>`,
       )
       .join("");
 
@@ -107,12 +108,12 @@ export async function viewAppointment(container, appointment_id, onBack) {
         e.preventDefault();
 
         const selectedServiceId = Number(
-          document.getElementById("serviceSelect").value
+          document.getElementById("serviceSelect").value,
         );
 
         const dateValue = document.getElementById("appointmentDateInput").value;
         const timeValue = document.getElementById(
-          "appointmentStartInput"
+          "appointmentStartInput",
         ).value;
 
         if (!dateValue || !timeValue) {
@@ -120,41 +121,44 @@ export async function viewAppointment(container, appointment_id, onBack) {
           return;
         }
 
-        const [hh, min] = timeValue.split(":").map(Number);
-
-        const dt = new Date(`${dateValue}T00:00:00`);
-        dt.setHours(hh, min, 0, 0);
-
         const newStart = `${dateValue}T${timeValue}:00`;
 
-        try {
-          const updated = {
-            start: newStart,
-            service_id: selectedServiceId,
-          };
+        const result = await updateAppointment({
+          appointmentId: appointment_id,
+          serviceId: selectedServiceId,
+          clientId: localStorage.getItem("client_id"),
+          start: newStart,
+        });
 
-          const { error: updateError } = await supabase
-            .from("appointment")
-            .update(updated)
-            .eq("id", appointment_id);
-
-          if (updateError) throw updateError;
-
-          showToast("Turno actualizado correctamente", "success");
-          goBack(); // ir al calendar o a home
-        } catch (err) {
-          showToast("Error al actualizar el turno: " + err.message, "error");
+        if (!result.ok) {
+          switch (result.reason) {
+            case "NO_AVAILABILITY":
+              showToast("Ese horario ya no está disponible", "error");
+              break;
+            case "SERVICE_NOT_FOUND":
+              showToast("El servicio seleccionado no existe", "error");
+              break;
+            case "NOT_FOUND_OR_FORBIDDEN":
+              showToast("No tenés permiso para modificar este turno", "error");
+              break;
+            default:
+              showToast("Error al actualizar el turno", "error");
+          }
+          return;
         }
+
+        showToast("Turno actualizado correctamente", "success");
+        goBack();
       });
 
     document
       .getElementById("btn-delete-appointment")
       .addEventListener("click", async () => {
         const dateValue = document.getElementById(
-          "appointmentDateInput"
+          "appointmentDateInput",
         )?.value;
         const timeValue = document.getElementById(
-          "appointmentStartInput"
+          "appointmentStartInput",
         )?.value;
 
         const okModal = await confirmModal({
@@ -170,26 +174,6 @@ export async function viewAppointment(container, appointment_id, onBack) {
         const ok = await cancelSingleAppointment(appointment_id);
         if (ok) goBack();
       });
-
-    // document
-    //   .getElementById("btn-delete-appointment")
-    //   .addEventListener("click", async () => {
-    //     if (!confirm("¿Seguro que querés eliminar este turno?")) return;
-
-    //     try {
-    //       const { error: deleteError } = await supabase
-    //         .from("appointment")
-    //         .delete()
-    //         .eq("id", appointment_id);
-
-    //       if (deleteError) throw deleteError;
-
-    //       showToast("Turno eliminado correctamente", "success");
-    //       showClientServices(container); // ir a home o a calendar
-    //     } catch (err) {
-    //       showToast("No se pudo eliminar el turno: " + err.message, "error");
-    //     }
-    //   });
   } catch (error) {
     console.error("Error cargando el turno:", error);
     container.innerHTML = `<p class='text-danger'>Error al cargar el turno.</p>`;

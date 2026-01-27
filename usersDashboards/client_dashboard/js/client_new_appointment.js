@@ -2,10 +2,14 @@ import { showLoader } from "../../../js/utils/loader.js";
 import { supabase } from "../../../supabaseClient.js";
 import { showClientHome } from "./client_home.js";
 import { showToast } from "../../../js/utils/toast.js";
+import {
+  getAvailableSlots,
+  createAppointment,
+} from "../../../js/utils/availability.js";
 
 const appointmentState = {
   user: null,
-  appointment: null,
+  selectedSlot: null,
 };
 
 async function loadUsers(stepContent) {
@@ -59,24 +63,28 @@ async function loadServices(stepContent) {
 async function submitAppointment(stepContent) {
   const userId = stepContent.querySelector("#userIDSelect").value;
   const serviceId = stepContent.querySelector("#serviceIDSelect").value;
-  const start = stepContent.querySelector("#appointmentDateInput").value;
+  const start = appointmentState.selectedSlot;
+  const clientId = localStorage.getItem("client_id");
 
   if (!userId || !serviceId || !start) {
     showToast("Completa todos los campos", "error");
     return;
   }
 
-  const { error } = await supabase.from("appointment").insert({
+  const result = await createAppointment({
+    serviceId,
+    userId,
     start,
-    user_id: userId,
-    user_client_id: localStorage.getItem("client_id"),
-    service_id: serviceId,
+    clientId,
   });
 
-  if (error) {
-    showToast("Error al crear el turno: " + error.message, "error");
-    console.error(error);
-    return;
+  if (!result.ok) {
+    if (result.reason === "NO_AVAILABILITY") {
+      showToast("Ese horario ya fue tomado", "error");
+    } else {
+      showToast("No se pudo crear el turno", "error");
+    }
+    return false;
   }
 
   showToast("Turno creado correctamente", "success");
@@ -202,11 +210,12 @@ async function renderExistingUserForm(container) {
       </select>
     </div>
     <div class="col-md-4 mb-3">
-            <label class="form-label">Fecha y hora:</label>
-            <input type="datetime-local" class="form-control"
+            <label class="form-label">Fecha:</label>
+            <input type="date" class="form-control"
                 id="appointmentDateInput"
                 required>
     </div>
+    <div id="available-slots" class="d-flex flex-wrap gap-2 mt-3"></div>
     <div class="mb-3">
       <label class="form-label">Servicio:</label>
       <select class="form-select" id="serviceIDSelect" required>
@@ -221,6 +230,15 @@ async function renderExistingUserForm(container) {
 
   setupBackButton(container, () => renderOptionStep(container));
 
+  const serviceSelect = stepContent.querySelector("#serviceIDSelect");
+  const dateInput = stepContent.querySelector("#appointmentDateInput");
+
+  serviceSelect.addEventListener("change", () =>
+    loadAvailableSlotsUI(stepContent),
+  );
+
+  dateInput.addEventListener("change", () => loadAvailableSlotsUI(stepContent));
+
   await loadUsers(stepContent);
   await loadServices(stepContent);
 
@@ -234,7 +252,71 @@ async function renderExistingUserForm(container) {
     });
 }
 
+async function loadAvailableSlotsUI(stepContent) {
+  const serviceId = stepContent.querySelector("#serviceIDSelect").value;
+  const date = stepContent.querySelector("#appointmentDateInput").value;
+  const slotsContainer = stepContent.querySelector("#available-slots");
+
+  appointmentState.selectedSlot = null;
+  slotsContainer.innerHTML = "";
+
+  if (!serviceId || !date) {
+    return;
+  }
+
+  slotsContainer.innerHTML =
+    "<span class='text-muted'>Cargando horarios...</span>";
+
+  // console.log("Disponibilidad params:", {
+  //   serviceId,
+  //   date,
+  //   clientId: localStorage.getItem("client_id"),
+  // });
+
+  const slots = await getAvailableSlots({
+    serviceId,
+    date,
+    clientId: localStorage.getItem("client_id"),
+  });
+
+  slotsContainer.innerHTML = "";
+
+  if (!slots.length) {
+    slotsContainer.innerHTML =
+      "<span class='text-muted'>No hay horarios disponibles</span>";
+    return;
+  }
+
+  slots.forEach((slot) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "btn btn-outline-primary btn-sm";
+    btn.textContent = formatTime(slot);
+
+    btn.onclick = () => {
+      appointmentState.selectedSlot = slot;
+
+      slotsContainer
+        .querySelectorAll("button")
+        .forEach((b) => b.classList.remove("btn-primary"));
+
+      btn.classList.remove("btn-outline-primary");
+      btn.classList.add("btn-primary");
+    };
+
+    slotsContainer.appendChild(btn);
+  });
+}
+
 function setupBackButton(container, onBackAction) {
   const btnBack = container.querySelector("#btn-back");
   btnBack.onclick = onBackAction;
+}
+
+function formatTime(isoString) {
+  const d = new Date(isoString);
+  return d.toLocaleTimeString("es-AR", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 }

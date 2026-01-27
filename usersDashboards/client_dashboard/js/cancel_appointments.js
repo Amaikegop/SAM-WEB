@@ -1,13 +1,16 @@
-import { supabase } from "../../../supabaseClient.js";
 import { showToast } from "../../../js/utils/toast.js";
+import {
+  deleteAppointment,
+  deleteAppointmentsOfDay,
+} from "../../../js/utils/availability.js";
 
 export async function cancelSingleAppointment(appointmentId) {
-  const { error } = await supabase
-    .from("appointment")
-    .delete()
-    .eq("id", appointmentId);
+  const result = await deleteAppointment({
+    appointmentId,
+    clientId: localStorage.getItem("client_id"),
+  });
 
-  if (error) {
+  if (!result.ok) {
     showToast("No se pudo cancelar el turno", "error");
     return false;
   }
@@ -17,17 +20,13 @@ export async function cancelSingleAppointment(appointmentId) {
 }
 
 export async function cancelAppointmentsOfDay(date, clientUserIds) {
-  const dayStart = `${date}T00:00:00`;
-  const dayEnd = `${date}T23:59:59`;
+  const result = await deleteAppointmentsOfDay({
+    date,
+    userIds: clientUserIds,
+    clientId: localStorage.getItem("client_id"),
+  });
 
-  const { error } = await supabase
-    .from("appointment")
-    .delete()
-    .in("user_id", clientUserIds)
-    .gte("start", dayStart)
-    .lte("start", dayEnd);
-
-  if (error) {
+  if (!result.ok) {
     showToast("Error al cancelar todos los turnos", "error");
     return false;
   }

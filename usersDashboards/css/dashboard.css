@@ -260,3 +260,174 @@ body {
 .option-btn:active {
   transform: scale(0.97);
 }
+
+@media (max-width: 576px) {
+  .progress-container ol {
+    gap: 6px;
+  }
+
+  .progress-container li {
+    font-size: 0;
+    gap: 0;
+  }
+
+  .progress-container li::before {
+    font-size: 14px;
+  }
+
+  :root {
+    --step-size: 28px;
+  }
+
+  .form-multi-step {
+    width: 100%;
+    padding: 16px;
+    border-radius: 12px; /* opcional */
+  }
+
+  .step {
+    padding: 16px 4px;
+  }
+}
+
+html {
+  height: 100%;
+}
+body.page-register {
+  min-height: 100%;
+  overflow: hidden;
+}
+
+:root {
+  --step-color: #ced7e0;
+  --step-size: 32px;
+  --steps: 5;
+  --progress-width: calc((var(--steps) - 1) / var(--steps) * 100%);
+}
+
+/* form-styles */
+.form-multi-step {
+  background-color: #fff;
+  padding: 32px;
+  border-radius: 8px;
+  width: min(800px, 90%);
+  box-shadow: 0, 4px, 16px, rgba(167, 21, 84, 0.1);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.progress-container {
+  position: relative;
+}
+
+/* .progress-container::before {
+  content: "";
+  height: 4px;
+  width: var(--progress-width);
+  background-color: var(--step-color);
+  position: absolute;
+  top: calc(var(--step-size) / 2);
+  left: 50%;
+  translate: -47% -47%;
+} */
+
+.progress-container ol {
+  list-style-type: none;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  counter-reset: step-number;
+  position: relative;
+  z-index: 3;
+}
+
+.progress-container li {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--bs-light);
+  transition: 0.3s linear 0.3s;
+}
+
+.progress-container li::before {
+  counter-increment: step-number;
+  content: counter(step-number);
+  background-color: var(--step-color);
+  width: var(--step-size);
+  height: var(--step-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--bs-light);
+  transition: 0.3s linear 0.3s;
+}
+
+.progress-container li:where(.done-step, .current-step) {
+  color: var(--bs-secondary);
+  font-weight: 500;
+}
+
+.progress-container li.done-step::before {
+  background-color: var(--bs-primary);
+}
+
+.progress-container li.current-step::before {
+  background-color: var(--bs-primary);
+  box-shadow: 0 0 0 3px rgba(167, 21, 84, 0.25);
+}
+
+.steps-container {
+  display: flex;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.step {
+  flex: 1 0 100%;
+  padding: 24px 8px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  overflow-y: auto;
+  max-height: 100%;
+  min-height: 0;
+}
+
+.step.current-step {
+  opacity: 1;
+}
+
+.btn-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 16px;
+  padding-inline: 8px;
+}
+
+.btn-controls button {
+  flex: 1;
+}
+
+.btn-delete {
+  background: none;
+  border: none;
+  color: red;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.btn-add-service {
+  background: none;
+  border: none;
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-bottom: 10px;
+}

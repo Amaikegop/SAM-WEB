@@ -1,378 +1,509 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>SAM - Sistema automatizado de mensajes</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="keywords" />
+    <meta content="" name="description" />
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link href="img/favicon.ico" rel="icon" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/animate/animate.min.css" rel="stylesheet" />
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link rel="stylesheet" href="scss/bootstrap.css">
-
+    <link rel="stylesheet" href="scss/bootstrap.css" />
 
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-</head>
+    <link href="css/style.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
 
-<body>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-VSW7Z0EXNY"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-VSW7Z0EXNY");
+    </script>
+  </head>
+
+  <body>
     <!-- Spinner Start -->
-    <div id="spinner"
-        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-        <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
-            <span class="sr-only">Cargando...</span>
-        </div>
+    <div
+      id="spinner"
+      class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
+    >
+      <div
+        class="spinner-grow text-primary"
+        style="width: 3rem; height: 3rem"
+        role="status"
+      >
+        <span class="sr-only">Cargando...</span>
+      </div>
     </div>
     <!-- Spinner End -->
 
-
-        <!-- Navbar Start -->
+    <!-- Navbar Start -->
     <div class="container-fluid sticky-top">
-        <div class="container">
-            <nav class="navbar navbar-expand-lg">
-                <a href="index.html" class="navbar-brand">
-                    <img id="navbar-logo" src="img/SAM(tranparente).png" alt="">
-                </a>
+      <div class="container">
+        <nav class="navbar navbar-expand-lg">
+          <a href="index.html" class="navbar-brand">
+            <img id="navbar-logo" src="img/SAM(tranparente).png" alt="" />
+          </a>
 
-                <!-- Botón para abrir sidebar -->
-                <button class="btn d-lg-none ms-auto" type="button" data-bs-toggle="offcanvas" 
-                        data-bs-target="#mobileMenu" aria-controls="mobileMenu">
-                    <i class="bi bi-list fs-1"></i>
-                </button>
+          <!-- Botón para abrir sidebar -->
+          <button
+            class="btn d-lg-none ms-auto"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#mobileMenu"
+            aria-controls="mobileMenu"
+          >
+            <i class="bi bi-list fs-1"></i>
+          </button>
 
-                <!-- Menú normal para desktop -->
-                <div class="collapse navbar-collapse d-none d-lg-flex" id="navbarCollapse">
-                    <div class="navbar-nav ms-auto">
-                        <a href="index.html" class="nav-item nav-link">Inicio</a>
-                        <a href="about.html" class="nav-item nav-link">Nosotros</a>
-                        <a href="service.html" class="nav-item nav-link">Servicios</a>
-                        <a href="contact.html" class="nav-item nav-link">Contacto</a>
-                    </div>
-                </div>
-            </nav>
-        </div>
+          <!-- Menú normal para desktop -->
+          <div
+            class="collapse navbar-collapse d-none d-lg-flex"
+            id="navbarCollapse"
+          >
+            <div class="navbar-nav ms-auto">
+              <a href="index.html" class="nav-item nav-link">Inicio</a>
+              <a href="about.html" class="nav-item nav-link">Nosotros</a>
+              <a href="service.html" class="nav-item nav-link">Servicios</a>
+              <a href="contact.html" class="nav-item nav-link">Contacto</a>
+            </div>
+          </div>
+        </nav>
+      </div>
     </div>
 
     <!-- Offcanvas menú para móviles -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="mobileMenuLabel">Menú</h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+    <div
+      class="offcanvas offcanvas-end"
+      tabindex="-1"
+      id="mobileMenu"
+      aria-labelledby="mobileMenuLabel"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="mobileMenuLabel">Menú</h5>
+        <button
+          type="button"
+          class="btn-close text-reset"
+          data-bs-dismiss="offcanvas"
+          aria-label="Cerrar"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <div class="navbar-nav flex-column">
+          <a href="index.html" class="nav-item nav-link active">Inicio</a>
+          <a href="about.html" class="nav-item nav-link">Nosotros</a>
+          <a href="service.html" class="nav-item nav-link">Servicios</a>
+          <a href="contact.html" class="nav-item nav-link">Contacto</a>
         </div>
-        <div class="offcanvas-body">
-            <div class="navbar-nav flex-column">
-                <a href="index.html" class="nav-item nav-link active">Inicio</a>
-                <a href="about.html" class="nav-item nav-link">Nosotros</a>
-                <a href="service.html" class="nav-item nav-link">Servicios</a>
-                <a href="contact.html" class="nav-item nav-link">Contacto</a>
-            </div>
-        </div>
+      </div>
     </div>
 
-     <!-- Hero Start -->
+    <!-- Hero Start -->
     <div class="container-fluid pb-5 bg-primary hero-header">
-        <div class="container py-5">
-            <div class="row g-3 align-items-center">
-                <div class="col-12 text-center text-lg-end">
-                    <h1 class="display-1 mb-0 animated slideInLeft">Servicios</h1>
-                </div>
-            </div>
+      <div class="container py-5">
+        <div class="row g-3 align-items-center">
+          <div class="col-12 text-center text-lg-end">
+            <h1 class="display-1 mb-0 animated slideInLeft">Servicios</h1>
+          </div>
         </div>
+      </div>
     </div>
     <!-- Hero End -->
 
     <!-- ================== SECCIÓN 1: Cómo funciona SAM ================== -->
     <div class="container-fluid py-5 bg-light" id="funciona">
-        <div class="container">
-            <div class="row align-items-center flex-column flex-md-row g-4">
-            
-            <!-- Columna derecha: Texto -->
-                <div class="col-md-6">
-                    <h1 class="fw-bold mb-4">¿Cómo funciona <span class="text-primary">SAM</span>?</h1>
-                    <p class="lead mb-3">
-                    SAM es un asistente virtual por WhatsApp que atiende a tus clientes de manera fluida y natural. 
-                    Gestiona turnos, envía recordatorios, confirma asistencia y guarda toda la información para consultas futuras.
-                    </p>
+      <div class="container">
+        <div class="row align-items-center flex-column flex-md-row g-4">
+          <!-- Columna derecha: Texto -->
+          <div class="col-md-6">
+            <h1 class="fw-bold mb-4">
+              ¿Cómo funciona <span class="text-primary">SAM</span>?
+            </h1>
+            <p class="lead mb-3">
+              SAM es un asistente virtual por WhatsApp que atiende a tus
+              clientes de manera fluida y natural. Gestiona turnos, envía
+              recordatorios, confirma asistencia y guarda toda la información
+              para consultas futuras.
+            </p>
 
-                    <!-- Carrousel de texto opcional -->
-                    <div id="funcionaCarousel" class="carousel slide mt-4" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <p class="mb-2">Responde consultas automáticamente y personaliza la comunicación según tu negocio.</p>
-                            </div>
-                            <div class="carousel-item">
-                                <p class="mb-2">Organiza y confirma turnos, evitando errores y olvidos.</p>
-                            </div>
-                            <div class="carousel-item">
-                                <p class="mb-2">Guarda el historial de turnos para análisis y seguimiento posterior.</p>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Carrousel de texto opcional -->
+            <div
+              id="funcionaCarousel"
+              class="carousel slide mt-4"
+              data-bs-ride="carousel"
+            >
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <p class="mb-2">
+                    Responde consultas automáticamente y personaliza la
+                    comunicación según tu negocio.
+                  </p>
                 </div>
-
-            <!-- Columna izquierda: Video -->
-            <div class="col-md-6 text-center">
-                <div class="shadow-sm rounded">
-                    <video class="demo" src="img/whatsapp.mp4" title="Demostración de SAM" allowfullscreen autoplay loop></video>
+                <div class="carousel-item">
+                  <p class="mb-2">
+                    Organiza y confirma turnos, evitando errores y olvidos.
+                  </p>
                 </div>
+                <div class="carousel-item">
+                  <p class="mb-2">
+                    Guarda el historial de turnos para análisis y seguimiento
+                    posterior.
+                  </p>
+                </div>
+              </div>
             </div>
+          </div>
 
+          <!-- Columna izquierda: Video -->
+          <div class="col-md-6 text-center">
+            <div class="shadow-sm rounded">
+              <video
+                class="demo"
+                src="img/whatsapp.mp4"
+                title="Demostración de SAM"
+                allowfullscreen
+                autoplay
+                loop
+              ></video>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-
 
     <!-- ================== SECCIÓN 2: Planes Disponibles ================== -->
     <div id="planes" class="container-fluid py-5">
-        <div class="container">
-            <!-- Título -->
-            <div class="text-center mb-5">
-                <h1 class="mb-3">Nuestros <span class="text-uppercase text-primary px-2">Planes</span></h1>
-                <p class="text-muted">Opciones flexibles para emprendedores, negocios en crecimiento y empresas consolidadas.</p>
-            </div>
-
-            <!-- Cards de Planes -->
-            <div class="row row-cols-1 row-cols-md-3 g-4">
-                <!-- Plan Básico -->
-                <div class="col">
-                    <div class="card h-100 shadow-sm rounded-4">
-                        <div class="card-header bg-white text-center py-4">
-                            <h4 class="my-0 fw-bold">Básico</h4>
-                            <p class="text-primary mb-0">1 mes gratis de prueba</p>
-                        </div>
-                        <div class="card-body text-center">
-                            <h2 class="card-title pricing-card-title"> <small class="text-muted fw-light">Próximamente</small></h2>
-                            <ul class="mt-3 mb-4 text-start">
-                            <li> Mensajes y usuarios ilimitados*</li>
-                            <li> Respuestas personalizadas</li>
-                            <li> Panel de administrador</li>
-                            <li> Gestión de asistencia</li>
-                            <li> Soporte vía email</li>
-                            </ul>
-                            <button class="btn btn-outline-primary w-100 py-2">Empezar gratis</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Plan Premium -->
-                <div class="col">
-                    <div class="card h-100 shadow-sm border-primary rounded-4 featured">
-                        <div class="card-header bg-primary text-white text-center py-4 rounded-top-4">
-                            <h4 class="my-0 fw-bold">Premium</h4>
-                            <p class="mb-0">Potencia tu negocio</p>
-                        </div>
-                        <div class="card-body text-center">
-                            <h2 class="card-title pricing-card-title"> <small class="text-muted fw-light">Próximamente</small></h2>
-                            <ul class="mt-3 mb-4 text-start">
-                            <li> Mensajes y usuarios ilimitados*</li>
-                            <li> Respuestas personalizadas</li>
-                            <li> Panel de administrador</li>
-                            <li> Gestión de asistencia</li>
-                            <li> Recordatorios automáticos</li>
-                            <li> Estadísticas de turnos</li>
-                            <li> Gestión de pagos </li>
-                            <li> Soporte vía email</li>
-                            </ul>
-                            <button class="btn btn-primary w-100 py-2">Elegir Premium</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Plan Personalizado -->
-                <div class="col">
-                    <div class="card h-100 shadow-sm rounded-4">
-                        <div class="card-header bg-white text-center py-4">
-                            <h4 class="my-0 fw-bold">Personalizado</h4>
-                            <p class="text-primary mb-0">Juntos diseñamos la mejor solución tu negocio</p>
-                        </div>
-                        <div class="card-body text-center">
-                            <h2 class="card-title pricing-card-title">A medida</h2>
-                            <ul class="mt-3 mb-4 text-start">
-                            <li> Funcionalidades adaptadas a tu negocio</li>
-                            <li> Integraciones especiales</li>
-                            <li> Atención prioritaria</li>
-                            </ul>
-                            <button class="btn btn-outline-primary w-100 py-2">Consultar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <p class="text-center text-muted mt-4 fst-italic">
-            *Uso ilimitado dentro de parámetros razonables.
-            </p>
+      <div class="container">
+        <!-- Título -->
+        <div class="text-center mb-5">
+          <h1 class="mb-3">
+            Nuestros
+            <span class="text-uppercase text-primary px-2">Planes</span>
+          </h1>
+          <p class="text-muted">
+            Opciones flexibles para emprendedores, negocios en crecimiento y
+            empresas consolidadas.
+          </p>
         </div>
+
+        <!-- Cards de Planes -->
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          <!-- Plan Básico -->
+          <div class="col">
+            <div class="card h-100 shadow-sm rounded-4">
+              <div class="card-header bg-white text-center py-4">
+                <h4 class="my-0 fw-bold">Básico</h4>
+                <p class="text-primary mb-0">1 mes gratis de prueba</p>
+              </div>
+              <div class="card-body text-center">
+                <h2 class="card-title pricing-card-title">
+                  <small class="text-muted fw-light">Próximamente</small>
+                </h2>
+                <ul class="mt-3 mb-4 text-start">
+                  <li>Mensajes y usuarios ilimitados*</li>
+                  <li>Respuestas personalizadas</li>
+                  <li>Panel de administrador</li>
+                  <li>Gestión de asistencia</li>
+                  <li>Soporte vía email</li>
+                </ul>
+                <button class="btn btn-outline-primary w-100 py-2">
+                  Empezar gratis
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Plan Premium -->
+          <div class="col">
+            <div class="card h-100 shadow-sm border-primary rounded-4 featured">
+              <div
+                class="card-header bg-primary text-white text-center py-4 rounded-top-4"
+              >
+                <h4 class="my-0 fw-bold">Premium</h4>
+                <p class="mb-0">Potencia tu negocio</p>
+              </div>
+              <div class="card-body text-center">
+                <h2 class="card-title pricing-card-title">
+                  <small class="text-muted fw-light">Próximamente</small>
+                </h2>
+                <ul class="mt-3 mb-4 text-start">
+                  <li>Mensajes y usuarios ilimitados*</li>
+                  <li>Respuestas personalizadas</li>
+                  <li>Panel de administrador</li>
+                  <li>Gestión de asistencia</li>
+                  <li>Recordatorios automáticos</li>
+                  <li>Estadísticas de turnos</li>
+                  <li>Gestión de pagos</li>
+                  <li>Soporte vía email</li>
+                </ul>
+                <button class="btn btn-primary w-100 py-2">
+                  Elegir Premium
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Plan Personalizado -->
+          <div class="col">
+            <div class="card h-100 shadow-sm rounded-4">
+              <div class="card-header bg-white text-center py-4">
+                <h4 class="my-0 fw-bold">Personalizado</h4>
+                <p class="text-primary mb-0">
+                  Juntos diseñamos la mejor solución tu negocio
+                </p>
+              </div>
+              <div class="card-body text-center">
+                <h2 class="card-title pricing-card-title">A medida</h2>
+                <ul class="mt-3 mb-4 text-start">
+                  <li>Funcionalidades adaptadas a tu negocio</li>
+                  <li>Integraciones especiales</li>
+                  <li>Atención prioritaria</li>
+                </ul>
+                <button class="btn btn-outline-primary w-100 py-2">
+                  Consultar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-center text-muted mt-4 fst-italic">
+          *Uso ilimitado dentro de parámetros razonables.
+        </p>
+      </div>
     </div>
-
-
 
     <!-- ================== SECCIÓN 3: Cuadro comparativo ================== -->
     <div class="container-fluid py-5 bg-light" id="comparativo">
-        <div class="container">
-            <h2 class="text-center fw-bold mb-5">Compará nuestros <span class="text-primary">Planes</span></h2>
-            <div class="table-responsive">
-                <table class="table table-bordered text-center align-middle">
-                    <thead class="bg-secondary text-white">
-                    <tr>
-                        <th>Características</th>
-                        <th>Básico</th>
-                        <th>Premium</th>
-                        <th>Personalizado</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Mensajes y usuarios ilimitados</td>
-                        <td>✔️</td>
-                        <td>✔️</td>
-                        <td>✔️</td>
-                    </tr>
-                    <tr>
-                        <td>Respuestas personalizadas</td>
-                        <td>✔️</td>
-                        <td>✔️</td>
-                        <td>✔️</td>
-                    </tr>
-                    <tr>
-                        <td>Gestión de asistencia</td>
-                        <td>✔️</td>
-                        <td>✔️</td>
-                        <td>✔️</td>
-                    </tr>
-                    <tr>
-                        <td>Recordatorios automáticos</td>
-                        <td>❌</td>
-                        <td>✔️</td>
-                        <td>✔️</td>
-                    </tr>
-                    <tr>
-                        <td>Gestión de pagos</td>
-                        <td>❌</td>
-                        <td>✔️</td>
-                        <td>Opcional</td>
-                    </tr>
-                    <tr>
-                        <td>Integraciones personalizadas</td>
-                        <td>❌</td>
-                        <td>❌</td>
-                        <td>✔️</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+      <div class="container">
+        <h2 class="text-center fw-bold mb-5">
+          Compará nuestros <span class="text-primary">Planes</span>
+        </h2>
+        <div class="table-responsive">
+          <table class="table table-bordered text-center align-middle">
+            <thead class="bg-secondary text-white">
+              <tr>
+                <th>Características</th>
+                <th>Básico</th>
+                <th>Premium</th>
+                <th>Personalizado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Mensajes y usuarios ilimitados</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+              </tr>
+              <tr>
+                <td>Respuestas personalizadas</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+              </tr>
+              <tr>
+                <td>Gestión de asistencia</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+              </tr>
+              <tr>
+                <td>Recordatorios automáticos</td>
+                <td>❌</td>
+                <td>✔️</td>
+                <td>✔️</td>
+              </tr>
+              <tr>
+                <td>Gestión de pagos</td>
+                <td>❌</td>
+                <td>✔️</td>
+                <td>Opcional</td>
+              </tr>
+              <tr>
+                <td>Integraciones personalizadas</td>
+                <td>❌</td>
+                <td>❌</td>
+                <td>✔️</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+      </div>
     </div>
-
 
     <!-- ================== SECCIÓN 4: Detalle de los planes ================== -->
     <div class="container-fluid py-5" id="detalle">
-        <div class="container">
-            <h2 class="text-center fw-bold mb-5">Detalle de cada <span class="text-primary">Plan</span></h2>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <h4 class="fw-bold text-primary">Plan Básico</h4>
-                    <p>Ideal para quienes recién empiezan. Te permite gestionar turnos de forma organizada, con respuestas personalizadas y un panel de administración sencillo.</p>
-                </div>
-                <div class="col-md-4">
-                    <h4 class="fw-bold text-primary">Plan Premium</h4>
-                    <p>Pensado para negocios en crecimiento. Incluye recordatorios automáticos, estadísticas detalladas y gestión de pagos, además de soporte más cercano vía WhatsApp.</p>
-                </div>
-                <div class="col-md-4">
-                    <h4 class="fw-bold text-primary">Plan Personalizado</h4>
-                    <p>La solución más completa. Adaptamos SAM a tus necesidades particulares, con integraciones especiales, atención prioritaria y escalabilidad garantizada.</p>
-                </div>
-            </div>
+      <div class="container">
+        <h2 class="text-center fw-bold mb-5">
+          Detalle de cada <span class="text-primary">Plan</span>
+        </h2>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <h4 class="fw-bold text-primary">Plan Básico</h4>
+            <p>
+              Ideal para quienes recién empiezan. Te permite gestionar turnos de
+              forma organizada, con respuestas personalizadas y un panel de
+              administración sencillo.
+            </p>
+          </div>
+          <div class="col-md-4">
+            <h4 class="fw-bold text-primary">Plan Premium</h4>
+            <p>
+              Pensado para negocios en crecimiento. Incluye recordatorios
+              automáticos, estadísticas detalladas y gestión de pagos, además de
+              soporte más cercano vía WhatsApp.
+            </p>
+          </div>
+          <div class="col-md-4">
+            <h4 class="fw-bold text-primary">Plan Personalizado</h4>
+            <p>
+              La solución más completa. Adaptamos SAM a tus necesidades
+              particulares, con integraciones especiales, atención prioritaria y
+              escalabilidad garantizada.
+            </p>
+          </div>
         </div>
+      </div>
     </div>
-
-    
 
     <!-- Footer Start -->
     <div class="container-fluid bg-secondary text-white-50 footer pt-2">
-        <div class="container py-3">
-            <div class="row text-center text-md-start">
-            
-                <!-- Logo -->
-                <div class="col-12 col-md-6 col-lg-3 mb-3 wow fadeIn" data-wow-delay="0.1s">
-                    <a href="index.html" class="d-inline-block mb-3">
-                    <img class="img-fluid" src="img/SAM(negativo-transparente).png" alt="">
-                    </a>
-                    <p class="mb-0">Sistema Automatizado </p>
-                    <p class="mb-0"> de Mensajes</p>
-                </div>
-                
-                <!-- Contacto -->
-                <div class="col-12 col-md-6 col-lg-6 mb-3 wow fadeIn" data-wow-delay="0.3s">
-                    <h5 class="text-white text-center mb-3">Contactanos</h5>
-                    <div class="row">
-                        <div class="col-12 col-sm-6 text-center text-sm-start">
-                            <p><i class="fa fa-map-marker-alt me-2"></i>Tandil, Bs As, Argentina</p>
-                            <p><i class="fa fa-envelope me-2"></i>sambusiness078@gmail.com</p>
-                        </div>
-                        <div class="col-12 col-sm-6 text-center text-sm-end">
-                            <p><i class="fa fa-phone-alt me-2"></i>+54 9 2494 31-3101</p>
-                            <p><i class="fa fa-phone-alt me-2"></i>+54 9 2494 66-3349</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Redes Sociales -->
-                <div class="col-12 col-md-12 col-lg-3 mb-3 wow fadeIn" data-wow-delay="0.3s">
-                    <h5 class="text-white text-center mb-3">Redes sociales</h5>
-                        <div class="d-flex justify-content-center">
-                        <a class="btn btn-outline-primary btn-square border-2 me-2" href="#"><i class="fab fa-youtube"></i></a>
-                        <a class="btn btn-outline-primary btn-square border-2 me-2" href="#"><i class="fab fa-instagram"></i></a>
-                        <a class="btn btn-outline-primary btn-square border-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+      <div class="container py-3">
+        <div class="row text-center text-md-start">
+          <!-- Logo -->
+          <div
+            class="col-12 col-md-6 col-lg-3 mb-3 wow fadeIn"
+            data-wow-delay="0.1s"
+          >
+            <a href="index.html" class="d-inline-block mb-3">
+              <img
+                class="img-fluid"
+                src="img/SAM(negativo-transparente).png"
+                alt=""
+              />
+            </a>
+            <p class="mb-0">Sistema Automatizado</p>
+            <p class="mb-0">de Mensajes</p>
+          </div>
 
-        <div class="container wow fadeIn" data-wow-delay="0.1s">
+          <!-- Contacto -->
+          <div
+            class="col-12 col-md-6 col-lg-6 mb-3 wow fadeIn"
+            data-wow-delay="0.3s"
+          >
+            <h5 class="text-white text-center mb-3">Contactanos</h5>
             <div class="row">
-                <div class="col-12 text-center mb-3 mb-md-0">
-                    <a href="politicas_de_privacidad.html">Políticas de Privacidad</a>
-                </div>
+              <div class="col-12 col-sm-6 text-center text-sm-start">
+                <p>
+                  <i class="fa fa-map-marker-alt me-2"></i>Tandil, Bs As,
+                  Argentina
+                </p>
+                <p>
+                  <i class="fa fa-envelope me-2"></i>sambusiness078@gmail.com
+                </p>
+              </div>
+              <div class="col-12 col-sm-6 text-center text-sm-end">
+                <p><i class="fa fa-phone-alt me-2"></i>+54 9 2494 31-3101</p>
+                <p><i class="fa fa-phone-alt me-2"></i>+54 9 2494 66-3349</p>
+              </div>
             </div>
-        </div>
-        
-        <!-- Copy -->
-        <div class="container wow fadeIn" data-wow-delay="0.1s">
-            <div class="row">
-                <div class="col-12 text-center mb-3 mb-md-0">
-                    <p>SAM - Sistema Automatizado de Mensajes, Todos los derechos reservados.</p>
-                </div>
+          </div>
+
+          <!-- Redes Sociales -->
+          <div
+            class="col-12 col-md-12 col-lg-3 mb-3 wow fadeIn"
+            data-wow-delay="0.3s"
+          >
+            <h5 class="text-white text-center mb-3">Redes sociales</h5>
+            <div class="d-flex justify-content-center">
+              <a
+                class="btn btn-outline-primary btn-square border-2 me-2"
+                href="#"
+                ><i class="fab fa-youtube"></i
+              ></a>
+              <a
+                class="btn btn-outline-primary btn-square border-2 me-2"
+                href="#"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a class="btn btn-outline-primary btn-square border-2" href="#"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
             </div>
+          </div>
         </div>
+      </div>
+
+      <div class="container wow fadeIn" data-wow-delay="0.1s">
+        <div class="row">
+          <div class="col-12 text-center mb-3 mb-md-0">
+            <a href="politicas_de_privacidad.html">Políticas de Privacidad</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Copy -->
+      <div class="container wow fadeIn" data-wow-delay="0.1s">
+        <div class="row">
+          <div class="col-12 text-center mb-3 mb-md-0">
+            <p>
+              SAM - Sistema Automatizado de Mensajes, Todos los derechos
+              reservados.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
     <!-- Footer End -->
 
-
-
     <!-- Back to Top -->
-    <a href="#!" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-
+    <a href="#!" class="btn btn-lg btn-primary btn-lg-square back-to-top"
+      ><i class="bi bi-arrow-up"></i
+    ></a>
 
     <!-- JavaScript Libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -384,6 +515,5 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-</body>
-
+  </body>
 </html>
